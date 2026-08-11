@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>The Reading Evaluation Score Translator</title>
+<meta name="description" content="Type in the scores from your child's evaluation report and get back plain English: what each test measures, what it does not measure, and the questions to bring to the meeting. Free, no account, runs entirely in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Reading Evaluation Score Translator">
+<meta property="og:description" content="Type in the scores from your child's evaluation report and get back plain English: what each test measures, what it does not measure, and the questions to bring to the meeting. Free, no account, runs entirely in your browser.">
+<meta property="og:url" content="https://nathanplatteruser.github.io/reading/">
+<link rel="canonical" href="https://nathanplatteruser.github.io/reading/">
+<meta property="og:image" content="https://nathanplatteruser.github.io/img/cover-reading.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{
+    --bg:#f7f9f8;--card:#fff;--ink:#1d2422;--muted:#57625f;--faint:#8b9491;
+    --line:#e3e8e6;--line-strong:#c9d2cf;
+    --brand:#2f6f68;--brand-ink:#1f4f4a;--brand-soft:#e8f1ef;
+    --accent:#b8703c;--accent-soft:#fbf1e8;
+    --warn-bg:#fbf3e3;--warn-ink:#7a5a20;--warn-line:#eaddc2;
+    --ok:#3f7d54;--low:#a9552f;
+    --sans:-apple-system,"Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--ink);font:16.5px/1.6 var(--sans);padding-bottom:60px}
+  .wrap{max-width:740px;margin:0 auto;padding:0 18px}
+  h1,h2,h3{letter-spacing:-.015em;line-height:1.25}
+  button{font:inherit}
+
+  header{background:linear-gradient(180deg,var(--brand-soft),var(--bg));border-bottom:1px solid var(--line);padding:34px 0 26px;margin-bottom:26px}
+  .eyebrow{color:var(--accent);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.09em}
+  h1{font-size:28px;font-weight:800;margin:9px 0 0}
+  .sub{color:var(--muted);font-size:16px;margin-top:10px;max-width:560px}
+  .privacy{display:inline-block;margin-top:14px;background:#fff;border:1px solid var(--line-strong);color:var(--muted);
+    font-size:13px;padding:6px 12px;border-radius:99px}
+
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:18px}
+  .step h2{font-size:20px;font-weight:750;margin-bottom:6px}
+  .step .hint{color:var(--muted);font-size:15px;margin-bottom:18px}
+  .stepnum{display:inline-block;background:var(--brand);color:#fff;font-size:12.5px;font-weight:750;
+    padding:3px 10px;border-radius:99px;margin-bottom:10px;letter-spacing:.03em}
+
+  .tests{display:grid;gap:9px}
+  .tcheck{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;
+    padding:13px 15px;cursor:pointer;background:#fff;transition:border-color .12s,background .12s}
+  .tcheck:hover{border-color:var(--line-strong)}
+  .tcheck input{margin-top:4px;width:18px;height:18px;accent-color:var(--brand);flex:none}
+  .tcheck.on{border-color:var(--brand);background:var(--brand-soft)}
+  .tcheck b{font-weight:650;font-size:16px;display:block}
+  .tcheck span{color:var(--muted);font-size:14px;display:block;margin-top:1px}
+
+  .btn{background:var(--brand);color:#fff;font-weight:700;font-size:16.5px;padding:14px 26px;
+    border:0;border-radius:10px;cursor:pointer;margin-top:20px}
+  .btn:hover{background:var(--brand-ink)}
+  .btn[disabled]{background:var(--line-strong);cursor:not-allowed}
+  .btn.ghost{background:#fff;color:var(--brand-ink);border:1.5px solid var(--line-strong);font-weight:650}
+  .btn.ghost:hover{background:var(--brand-soft);border-color:var(--brand)}
+  .btn.sm{font-size:14.5px;padding:10px 18px;margin-top:0}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+
+  .tblock{border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden}
+  .tblock > header{background:var(--brand-soft);border:0;border-bottom:1px solid var(--line);
+    padding:14px 16px;margin:0;border-radius:0}
+  .tblock > header b{font-size:16.5px;font-weight:750;display:block}
+  .tblock > header span{font-size:13.5px;color:var(--muted);display:block;margin-top:2px}
+  .whatis{padding:14px 16px;background:#fcfdfd;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+  .whatis b{color:var(--ink);font-weight:650}
+  .rows{padding:6px 16px 14px}
+  .row{display:flex;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .row:last-child{border-bottom:0}
+  .row .lab{flex:1 1 190px;min-width:150px;font-size:15px}
+  .row .lab em{display:block;font-style:normal;color:var(--faint);font-size:13px;margin-top:1px}
+  .row input[type=number]{width:88px;padding:9px 10px;border:1.5px solid var(--line-strong);border-radius:8px;
+    font:inherit;font-size:15.5px;text-align:center;-moz-appearance:textfield}
+  .row input[type=number]:focus{outline:none;border-color:var(--brand)}
+  .row select{padding:9px 8px;border:1.5px solid var(--line-strong);border-radius:8px;font:inherit;
+    font-size:13.5px;background:#fff;color:var(--muted);max-width:132px}
+  .row select:focus{outline:none;border-color:var(--brand)}
+
+  .note{background:var(--brand-soft);border:1px solid #cfe2de;border-radius:10px;padding:14px 16px;
+    font-size:14.5px;color:var(--brand-ink);margin-bottom:18px}
+  .note b{font-weight:700}
+
+  /* results */
+  .rescard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:11px}
+  .rescard .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .rescard .nm{font-weight:700;font-size:16.5px}
+  .rescard .nm em{font-style:normal;color:var(--faint);font-weight:400;font-size:13.5px;display:block;margin-top:1px}
+  .band{font-size:13px;font-weight:750;padding:4px 11px;border-radius:99px;white-space:nowrap}
+  .b-high{background:#e6f0e9;color:var(--ok)}
+  .b-avg{background:var(--brand-soft);color:var(--brand-ink)}
+  .b-low{background:var(--accent-soft);color:var(--low)}
+  .bar{height:9px;background:#eef1f0;border-radius:99px;margin:13px 0 9px;position:relative;overflow:hidden}
+  .bar i{position:absolute;top:0;bottom:0;left:0;background:var(--brand);border-radius:99px}
+  .bar.lo i{background:var(--accent)}
+  .bar .mid{position:absolute;top:-3px;bottom:-3px;left:50%;width:2px;background:var(--line-strong)}
+  .plain{font-size:15px;color:var(--muted);margin-top:8px}
+  .plain b{color:var(--ink);font-weight:650}
+
+  .obs{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);
+    border-radius:10px;padding:16px 18px;margin-bottom:12px}
+  .obs h3{font-size:16.5px;font-weight:750;margin-bottom:7px}
+  .obs p{font-size:15px;color:var(--muted);margin-bottom:10px}
+  .obs ul{margin:0;padding-left:20px}
+  .obs li{font-size:15px;color:var(--ink);margin-bottom:7px}
+  .obs.flag{border-left-color:var(--accent)}
+
+  .qbox{background:var(--card);border:2px solid var(--brand);border-radius:12px;padding:20px;margin:20px 0}
+  .qbox h3{font-size:18px;font-weight:750;margin-bottom:4px}
+  .qbox .hint{color:var(--muted);font-size:14.5px;margin-bottom:14px}
+  .qbox ol{margin:0;padding-left:22px}
+  .qbox li{margin-bottom:10px;font-size:15.5px}
+
+  .disclaimer{background:var(--warn-bg);color:var(--warn-ink);border:1px solid var(--warn-line);
+    border-radius:10px;padding:16px 18px;font-size:14px;line-height:1.6;margin-top:22px}
+  .disclaimer b{font-weight:700}
+
+  .hide{display:none}
+  footer{text-align:center;color:var(--faint);font-size:13px;padding:30px 0 10px}
+
+  @media(max-width:520px){
+    h1{font-size:23px}.step{padding:18px 16px}.wrap{padding:0 14px}
+    .row .lab{flex:1 1 100%}
+  }
+  @media print{
+    body{background:#fff;padding:0}
+    .step,.btn,.btnrow,header .privacy,.noprint{display:none!important}
+    .rescard,.obs,.qbox{break-inside:avoid;border-color:#ccc}
+    header{background:none;padding:0 0 12px}
+  }
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <span class="eyebrow">Reading Evaluation Toolkit</span>
+  <h1>The Score Translator</h1>
+  <p class="sub">You got the evaluation back and it's a wall of acronyms and numbers. Put them in here and get plain English — plus the specific questions to ask at the meeting.</p>
+  <span class="privacy">🔒 Runs entirely in your browser. Nothing is stored, sent, or seen by anyone.</span>
+  <p class="hint" style="margin-top:10px">This is the free translator from <a href="https://upleveldliving.gumroad.com/l/reading" style="font-weight:700">The Reading Evaluation Toolkit</a>.</p>
+</div></header>
+
+<div class="wrap">
+
+<!-- STEP 1 -->
+<div class="step" id="s1">
+  <span class="stepnum">STEP 1 OF 2</span>
+  <h2>Which tests are in your report?</h2>
+  <p class="hint">Check every one you can find. They're usually in a results table near the back. Don't worry about the ones you don't recognize — pick what matches.</p>
+  <div class="tests" id="testlist"></div>
+  <button class="btn" id="go1" disabled>Next — enter the scores</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="step hide" id="s2">
+  <span class="stepnum">STEP 2 OF 2</span>
+  <h2>Type in the numbers</h2>
+  <p class="hint">Enter only the scores you can find — blanks are fine. Most reports list a <b>Standard Score</b> (a number near 100). Some list <b>Scaled Scores</b> (near 10) or percentiles. Use the little dropdown to match whatever your report shows.</p>
+  <div class="note"><b>Can't tell which kind you have?</b> If the number is between 40 and 160, it's almost always a Standard Score. If it's between 1 and 19, it's a Scaled Score.</div>
+  <div id="entry"></div>
+  <div class="btnrow">
+    <button class="btn" id="go2">Translate my scores</button>
+    <button class="btn ghost" id="back1">← Back</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results" class="hide"></div>
+
+</div>
+
+<footer class="noprint">The Reading Evaluation Toolkit · A calm way to read a confusing report.</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- math ---------- */
+function erf(x){
+  var s = x < 0 ? -1 : 1; x = Math.abs(x);
+  var a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+  var t=1/(1+p*x);
+  var y=1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+  return s*y;
+}
+function pctFromSS(ss){
+  var z=(ss-100)/15;
+  var p=50*(1+erf(z/Math.SQRT2));
+  return Math.min(99.9, Math.max(0.1, p));
+}
+function probit(p){
+  var a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+  var b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+  var c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+  var d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+  var pl=0.02425, q, r;
+  if(p<pl){ q=Math.sqrt(-2*Math.log(p)); return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+  if(p>1-pl){ q=Math.sqrt(-2*Math.log(1-p)); return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+  q=p-0.5; r=q*q;
+  return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+}
+/* normalize any entry to a standard-score equivalent (mean 100, SD 15) */
+function toSS(val, kind){
+  if(kind==='ss')     return val;
+  if(kind==='scaled') return 100 + (val-10)*5;
+  if(kind==='pct'){
+    var p=Math.min(99.9,Math.max(0.1,val))/100;
+    return 100 + 15*probit(p);
+  }
+  return val;
+}
+function bandOf(ss){
+  if(ss>=130) return {t:'Very High',  c:'b-high'};
+  if(ss>=120) return {t:'High',       c:'b-high'};
+  if(ss>=110) return {t:'High Average',c:'b-high'};
+  if(ss>=90)  return {t:'Average',    c:'b-avg'};
+  if(ss>=80)  return {t:'Low Average', c:'b-low'};
+  if(ss>=70)  return {t:'Low',        c:'b-low'};
+  return {t:'Very Low', c:'b-low'};
+}
+function ordinal(n){
+  var s=['th','st','nd','rd'], v=n%100;
+  return n+(s[(v-20)%10]||s[v]||s[0]);
+}
+
+/* ---------- test library ---------- */
+/* domain keys: reasoning, phono, wordread, fluency, comp, spelling, rapidnaming, workingmem, procspeed, overall */
+var TESTS = {
+  wiscv:{
+    name:'WISC-V', full:'Wechsler Intelligence Scale for Children, 5th Ed.',
+    tag:'Thinking and reasoning (not a reading test)',
+    what:'This measures how your child reasons, holds information in mind, and works through problems. <b>It does not measure reading at all.</b> In a reading evaluation its job is to establish what your child is capable of, so the reading scores have something to be compared against.',
+    notwhat:'It does not tell you whether your child can read, and it is not a measure of effort, motivation, or how hard they are trying.',
+    m:[
+      {id:'fsiq',lab:'Full Scale IQ (FSIQ)',dom:'overall',k:'ss',plain:'A single overall summary number.'},
+      {id:'vci', lab:'Verbal Comprehension (VCI)',dom:'reasoning',k:'ss',plain:'Reasoning with words, ideas, and word knowledge.'},
+      {id:'vsi', lab:'Visual Spatial (VSI)',dom:'reasoning',k:'ss',plain:'Reasoning with shapes, space, and visual detail.'},
+      {id:'fri', lab:'Fluid Reasoning (FRI)',dom:'reasoning',k:'ss',plain:'Spotting patterns and solving new problems.'},
+      {id:'wmi', lab:'Working Memory (WMI)',dom:'workingmem',k:'ss',plain:'Holding information in mind while using it.'},
+      {id:'psi', lab:'Processing Speed (PSI)',dom:'procspeed',k:'ss',plain:'How quickly simple visual work gets done.'}
+    ]
+  },
+  ctopp:{
+    name:'CTOPP-2', full:'Comprehensive Test of Phonological Processing, 2nd Ed.',
+    tag:'The sound system underneath reading',
+    what:'This is often the most important test in a reading evaluation and the one least likely to be explained to you. It measures whether your child can hear, hold, and manipulate the individual <b>sounds</b> in words — the skill that written letters have to attach to. Weakness here is what makes decoding effortful.',
+    notwhat:'It is not a hearing test, and it is not a measure of vocabulary or intelligence.',
+    m:[
+      {id:'pa', lab:'Phonological Awareness',dom:'phono',k:'ss',plain:'Hearing and manipulating sounds inside words.'},
+      {id:'pm', lab:'Phonological Memory',dom:'workingmem',k:'ss',plain:'Holding sounds in mind long enough to use them.'},
+      {id:'rsn',lab:'Rapid Symbolic Naming',dom:'rapidnaming',k:'ss',plain:'Naming familiar letters/numbers quickly and automatically.'},
+      {id:'rnn',lab:'Rapid Non-Symbolic Naming',dom:'rapidnaming',k:'ss',plain:'Naming colors/objects quickly and automatically.'}
+    ]
+  },
+  towre:{
+    name:'TOWRE-2', full:'Test of Word Reading Efficiency, 2nd Ed.',
+    tag:'Reading speed under a stopwatch',
+    what:'A timed test — your child reads as many words as possible in 45 seconds. It captures something untimed tests miss entirely: whether reading has become <b>automatic</b>. A child can be accurate and still be exhausted by reading if nothing is automatic yet.',
+    notwhat:'It does not measure comprehension, and it does not measure untimed accuracy.',
+    m:[
+      {id:'swe',lab:'Sight Word Efficiency (SWE)',dom:'wordread',k:'ss',plain:'Real words read correctly against the clock.'},
+      {id:'pde',lab:'Phonemic Decoding Efficiency (PDE)',dom:'phono',k:'ss',plain:'Made-up words sounded out against the clock.'},
+      {id:'twre',lab:'Total Word Reading Efficiency',dom:'fluency',k:'ss',plain:'The two timed scores combined.'}
+    ]
+  },
+  wiat:{
+    name:'WIAT-4', full:'Wechsler Individual Achievement Test, 4th Ed.',
+    tag:'Academic skills actually performed',
+    what:'This measures what your child can currently <b>do</b> academically — read words, sound out unfamiliar ones, understand passages, spell. In an evaluation it is usually the achievement side that gets compared against the thinking-and-reasoning side.',
+    notwhat:'It does not explain <em>why</em> a skill is weak — only that it is. The explanation comes from the pattern across tests.',
+    m:[
+      {id:'wr', lab:'Word Reading',dom:'wordread',k:'ss',plain:'Reading real words aloud, untimed.'},
+      {id:'pwd',lab:'Pseudoword Decoding',dom:'phono',k:'ss',plain:'Sounding out made-up words — pure decoding skill.'},
+      {id:'rc', lab:'Reading Comprehension',dom:'comp',k:'ss',plain:'Understanding what was read.'},
+      {id:'orf',lab:'Oral Reading Fluency',dom:'fluency',k:'ss',plain:'Reading passages aloud smoothly and at pace.'},
+      {id:'sp', lab:'Spelling',dom:'spelling',k:'ss',plain:'Spelling words to dictation.'}
+    ]
+  },
+  wj:{
+    name:'WJ-IV', full:'Woodcock-Johnson IV, Tests of Achievement',
+    tag:'Academic skills actually performed',
+    what:'Another widely used achievement battery. It covers the same ground as the WIAT — word reading, decoding, comprehension, fluency — with different names for the subtests.',
+    notwhat:'Like any achievement test, it shows the result, not the cause.',
+    m:[
+      {id:'lwi',lab:'Letter-Word Identification',dom:'wordread',k:'ss',plain:'Reading real words aloud.'},
+      {id:'wa', lab:'Word Attack',dom:'phono',k:'ss',plain:'Sounding out made-up words — pure decoding skill.'},
+      {id:'pc', lab:'Passage Comprehension',dom:'comp',k:'ss',plain:'Understanding what was read.'},
+      {id:'srf',lab:'Sentence Reading Fluency',dom:'fluency',k:'ss',plain:'Reading quickly and accurately under time.'},
+      {id:'sp', lab:'Spelling',dom:'spelling',k:'ss',plain:'Spelling words to dictation.'}
+    ]
+  },
+  ktea:{
+    name:'KTEA-3', full:'Kaufman Test of Educational Achievement, 3rd Ed.',
+    tag:'Academic skills actually performed',
+    what:'A third common achievement battery covering the same territory — word recognition, decoding, comprehension, fluency, spelling.',
+    notwhat:'Shows the result, not the cause.',
+    m:[
+      {id:'lwr',lab:'Letter & Word Recognition',dom:'wordread',k:'ss',plain:'Reading real words aloud.'},
+      {id:'nwd',lab:'Nonsense Word Decoding',dom:'phono',k:'ss',plain:'Sounding out made-up words — pure decoding skill.'},
+      {id:'rc', lab:'Reading Comprehension',dom:'comp',k:'ss',plain:'Understanding what was read.'},
+      {id:'srf',lab:'Silent Reading Fluency',dom:'fluency',k:'ss',plain:'Reading quickly and accurately under time.'},
+      {id:'sp', lab:'Spelling',dom:'spelling',k:'ss',plain:'Spelling words to dictation.'}
+    ]
+  },
+  gort:{
+    name:'GORT-5', full:'Gray Oral Reading Tests, 5th Ed.',
+    tag:'Reading passages out loud',
+    what:'Your child reads passages aloud while the examiner tracks errors and time, then answers questions. It separates <b>how</b> the reading sounds from <b>what</b> was understood — useful when a child understands plenty but the reading itself is laborious.',
+    notwhat:'It is not a silent-reading measure, and it does not isolate the sound system the way the CTOPP does.',
+    m:[
+      {id:'rate',lab:'Rate',dom:'fluency',k:'scaled',plain:'How quickly the passage was read.'},
+      {id:'acc', lab:'Accuracy',dom:'wordread',k:'scaled',plain:'How many words were read correctly.'},
+      {id:'flu', lab:'Fluency',dom:'fluency',k:'scaled',plain:'Rate and accuracy combined.'},
+      {id:'comp',lab:'Comprehension',dom:'comp',k:'scaled',plain:'Questions answered about the passage.'},
+      {id:'ori', lab:'Oral Reading Index (ORI)',dom:'fluency',k:'ss',plain:'The overall summary score.'}
+    ]
+  }
+};
+var ORDER=['wiscv','ctopp','towre','wiat','wj','ktea','gort'];
+
+var DOMLABEL={
+  reasoning:'reasoning and thinking',
+  phono:'sounding words out (decoding)',
+  wordread:'reading real words',
+  fluency:'reading smoothly and at pace',
+  comp:'understanding what was read',
+  spelling:'spelling',
+  rapidnaming:'naming things quickly and automatically',
+  workingmem:'working memory',
+  procspeed:'processing speed',
+  overall:'overall summary'
+};
+
+/* ---------- state ---------- */
+var picked=[], entries=[];
+
+/* ---------- step 1 ---------- */
+var listEl=document.getElementById('testlist');
+ORDER.forEach(function(key){
+  var t=TESTS[key];
+  var lab=document.createElement('label');
+  lab.className='tcheck';
+  lab.innerHTML='<input type="checkbox" value="'+key+'"><span><b>'+t.name+'</b><span>'+t.tag+'</span></span>';
+  listEl.appendChild(lab);
+  var cb=lab.querySelector('input');
+  cb.addEventListener('change',function(){
+    lab.classList.toggle('on',cb.checked);
+    picked = [].slice.call(listEl.querySelectorAll('input:checked')).map(function(x){return x.value;});
+    document.getElementById('go1').disabled = picked.length===0;
+  });
+});
+
+document.getElementById('go1').addEventListener('click',function(){
+  buildEntry();
+  document.getElementById('s1').classList.add('hide');
+  document.getElementById('s2').classList.remove('hide');
+  window.scrollTo(0,0);
+});
+document.getElementById('back1').addEventListener('click',function(){
+  document.getElementById('s2').classList.add('hide');
+  document.getElementById('s1').classList.remove('hide');
+  window.scrollTo(0,0);
+});
+
+/* ---------- step 2 ---------- */
+function buildEntry(){
+  var host=document.getElementById('entry');
+  host.innerHTML='';
+  picked.forEach(function(key){
+    var t=TESTS[key];
+    var box=document.createElement('div');
+    box.className='tblock';
+    var rows='';
+    t.m.forEach(function(m){
+      var opts=['ss','scaled','pct'].map(function(k){
+        var nm = k==='ss'?'Standard (~100)': k==='scaled'?'Scaled (~10)':'Percentile';
+        return '<option value="'+k+'"'+(k===m.k?' selected':'')+'>'+nm+'</option>';
+      }).join('');
+      rows+='<div class="row">'+
+        '<span class="lab">'+m.lab+'<em>'+m.plain+'</em></span>'+
+        '<input type="number" step="0.1" data-t="'+key+'" data-m="'+m.id+'" placeholder="—">'+
+        '<select data-kind="'+key+'.'+m.id+'">'+opts+'</select>'+
+      '</div>';
+    });
+    box.innerHTML=
+      '<header><b>'+t.name+'</b><span>'+t.full+'</span></header>'+
+      '<div class="whatis"><b>What it measures:</b> '+t.what+'<br><br><b>What it does not tell you:</b> '+t.notwhat+'</div>'+
+      '<div class="rows">'+rows+'</div>';
+    host.appendChild(box);
+  });
+}
+
+document.getElementById('go2').addEventListener('click',function(){
+  entries=[];
+  [].slice.call(document.querySelectorAll('#entry input[type=number]')).forEach(function(inp){
+    var raw=inp.value.trim();
+    if(raw==='') return;
+    var val=parseFloat(raw);
+    if(isNaN(val)) return;
+    var tk=inp.getAttribute('data-t'), mk=inp.getAttribute('data-m');
+    var sel=document.querySelector('select[data-kind="'+tk+'.'+mk+'"]');
+    var kind=sel?sel.value:'ss';
+    var meta=null;
+    TESTS[tk].m.forEach(function(m){ if(m.id===mk) meta=m; });
+    entries.push({test:TESTS[tk].name, lab:meta.lab, plain:meta.plain, dom:meta.dom,
+                  raw:val, kind:kind, ss:toSS(val,kind)});
+  });
+  if(!entries.length){ alert('Enter at least one score to translate.'); return; }
+  render();
+});
+
+/* ---------- analysis ---------- */
+function domAvg(doms){
+  var v=entries.filter(function(e){ return doms.indexOf(e.dom)>-1; }).map(function(e){ return e.ss; });
+  if(!v.length) return null;
+  return v.reduce(function(a,b){return a+b;},0)/v.length;
+}
+
+function buildObservations(){
+  var out=[];
+  var reasoning=domAvg(['reasoning']);
+  var phono=domAvg(['phono']);
+  var word=domAvg(['wordread']);
+  var flu=domAvg(['fluency']);
+  var comp=domAvg(['comp']);
+  var rn=domAvg(['rapidnaming']);
+  var wm=domAvg(['workingmem']);
+  var ps=domAvg(['procspeed']);
+
+  // 1. the central pattern
+  if(reasoning!==null && phono!==null && reasoning>=90 && phono<=85 && (reasoning-phono)>=12){
+    out.push({flag:true, h:'Strong reasoning alongside weaker sound-and-decoding skills',
+      p:'Your child reasons in the average range or better, but the scores that isolate the sound system and sounding-out are meaningfully lower. This particular gap — capable thinking, effortful decoding — is the pattern evaluators examine most closely in a reading evaluation, because it is the one that does not explain itself. It is the reason the evaluation happened.',
+      q:['Ask directly: "Is this the profile you would expect to see with a specific reading disability, and if not, what else explains it?"',
+         'Ask what reading instruction method is being recommended, and whether it is explicit, systematic, and phonics-based.',
+         'Ask how progress will be measured and how often you will be shown the data.']});
+  }
+  // 2. accurate but slow
+  if(word!==null && flu!==null && word>=90 && flu<=85 && (word-flu)>=10){
+    out.push({flag:true, h:'Reads the words correctly — but it costs a lot to do it',
+      p:'Word accuracy is holding up while the timed and fluency scores are noticeably lower. This is the profile behind a child who "can read fine" but avoids it, takes forever on homework, and is drained afterward. Accuracy has been achieved; automaticity has not.',
+      q:['Ask whether fluency is being targeted directly, not just accuracy.',
+         'Ask what the plan is for homework and testing volume while reading is still this effortful.',
+         'Ask whether audiobooks or text-to-speech are appropriate so that content learning is not gated behind reading speed.']});
+  }
+  // 3. decodes but doesn't understand
+  if(phono!==null && comp!==null && phono>=90 && comp<=85 && (phono-comp)>=10){
+    out.push({flag:true, h:'Sounds words out well, but comprehension lags',
+      p:'The decoding side looks solid while understanding is lower. This points in a different direction than a decoding-based reading difficulty, and it usually calls for a different kind of instruction — vocabulary, background knowledge, and language comprehension rather than more phonics.',
+      q:['Ask whether a speech-language evaluation of oral language comprehension is warranted.',
+         'Ask whether comprehension was tested with the passage in front of the child or removed — the two measure different things.',
+         'Ask what vocabulary and language instruction is being recommended, since more phonics may not be the answer here.']});
+  }
+  // 4. double deficit
+  if(phono!==null && rn!==null && phono<=85 && rn<=85){
+    out.push({flag:true, h:'Both the sound system and rapid naming are low',
+      p:'Weakness in phonological skills and in rapid automatic naming at the same time is a combination researchers track specifically, and it is often associated with slower response to intervention than either one alone. It is worth naming out loud in the meeting.',
+      q:['Ask whether the evaluator considered both areas together and what that means for the intensity of instruction.',
+         'Ask specifically about frequency and group size for any reading instruction offered — this profile generally needs more, not less.',
+         'Ask what timeline you should expect before seeing measurable change.']});
+  }
+  // 5. flat and low
+  if(reasoning!==null && phono!==null && word!==null && reasoning<85 && phono<85 && word<85){
+    out.push({h:'The scores are low across the board rather than uneven',
+      p:'Rather than one area standing out, the scores sit in a similar lower range together. That is a different picture than an isolated reading difficulty, and it usually prompts a broader look rather than a reading-only plan.',
+      q:['Ask whether a broader developmental or language evaluation is indicated.',
+         'Ask what was ruled out, and how vision and hearing were verified.',
+         'Ask how instruction will be adjusted across all subjects, not just reading.']});
+  }
+  // 6. wm / ps depressed vs reasoning
+  if(reasoning!==null){
+    var acc=[];
+    if(wm!==null && (reasoning-wm)>=15) acc.push('working memory');
+    if(ps!==null && (reasoning-ps)>=15) acc.push('processing speed');
+    if(acc.length){
+      out.push({h:'Reasoning outpaces '+acc.join(' and '),
+        p:'Your child\'s thinking scores are meaningfully higher than '+acc.join(' and ')+'. In practice this looks like a child who understands the material but loses it while writing it down, or who knows the answer and cannot produce it fast enough. This is the classic basis for accommodations.',
+        q:['Ask what accommodations follow from this — extended time and reduced copying are the usual starting points.',
+           'Ask whether instructions are being given in writing as well as out loud.',
+           'Ask that any accommodation discussed in the meeting be written into the document, not just agreed to verbally.']});
+    }
+  }
+  // 7. spread
+  var all=entries.map(function(e){return e.ss;});
+  var spread=Math.max.apply(null,all)-Math.min.apply(null,all);
+  if(entries.length>=4 && spread>=25){
+    out.push({h:'There is a wide spread between the highest and lowest scores',
+      p:'The distance between your child\'s strongest and weakest scores is about '+Math.round(spread)+' points. When scores are this uneven, any single overall or Full Scale number averages away the very thing the evaluation was meant to find. The individual parts are more informative than the summary.',
+      q:['Ask the evaluator whether the overall composite score is interpretable given this much scatter.',
+         'Ask them to walk you through the highest and lowest scores specifically, and what explains the distance.']});
+  }
+  // 8. nothing stands out
+  if(!out.length){
+    out.push({h:'No single area stands out sharply in what you entered',
+      p:'Based on the scores you entered, no one area separates clearly from the others. That can mean the difficulty sits somewhere these particular tests did not measure, that not enough scores were entered to show a pattern, or that the answer genuinely lies outside the testing — attention, anxiety, instruction history, or attendance.',
+      q:['Ask what specifically prompted the referral, and whether the testing addressed it.',
+         'Ask what was ruled out during the evaluation, and how.',
+         'Ask whether anything was observed during testing — effort, frustration, fatigue — that the numbers do not capture.']});
+  }
+  return out;
+}
+
+var UNIVERSAL=[
+  'What is the confidence interval around each of these scores? A single number is an estimate, and the report almost always contains a range that is rarely shown to parents.',
+  'Which of these scores are you weighting most heavily in your conclusion, and why?',
+  'Was my child rested, well, and cooperative on testing days — and would you consider these results a fair representation?',
+  'What specific instruction are you recommending, how many minutes per week, and in what group size?',
+  'How will progress be measured, how often, and how will you share that data with me?',
+  'If we do nothing differently, what do you expect this to look like in a year?'
+];
+
+/* ---------- render ---------- */
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+function render(){
+  var host=document.getElementById('results');
+  var h='';
+
+  h+='<div class="step noprint" style="border-color:var(--brand)">'+
+     '<h2 style="margin-bottom:4px">Your report, in plain English</h2>'+
+     '<p class="hint" style="margin-bottom:0">Below: every score you entered translated into everyday language, then the patterns worth asking about, then a question list you can bring to the meeting.</p>'+
+     '</div>';
+
+  /* score cards */
+  h+='<h2 style="font-size:21px;margin:22px 0 12px">What each number means</h2>';
+  entries.forEach(function(e){
+    var pct=pctFromSS(e.ss);
+    var pr=Math.round(pct);
+    var b=bandOf(e.ss);
+    var lo=e.ss<90;
+    var w=Math.min(100,Math.max(2,pct));
+    var shown = e.kind==='pct' ? ordinal(Math.round(e.raw))+' percentile'
+              : (e.kind==='scaled' ? 'scaled score '+e.raw : 'standard score '+e.raw);
+    h+='<div class="rescard">'+
+        '<div class="top"><span class="nm">'+esc(e.lab)+'<em>'+esc(e.test)+' · '+esc(e.plain)+'</em></span>'+
+        '<span class="band '+b.c+'">'+b.t+'</span></div>'+
+        '<div class="bar'+(lo?' lo':'')+'"><i style="width:'+w+'%"></i><span class="mid"></span></div>'+
+        '<p class="plain">You entered a <b>'+shown+'</b>. That sits at roughly the <b>'+ordinal(pr)+' percentile</b> — '+
+        'out of 100 children the same age, about <b>'+pr+'</b> scored lower and about <b>'+(100-pr)+'</b> scored higher on '+DOMLABEL[e.dom]+'.</p>'+
+       '</div>';
+  });
+
+  /* observations */
+  var obs=buildObservations();
+  h+='<h2 style="font-size:21px;margin:26px 0 12px">Patterns worth asking about</h2>';
+  h+='<div class="note noprint">These are observations about the <b>shape</b> of your scores — not conclusions about your child. Only a qualified evaluator can interpret this report. What these are for is making sure the right questions get asked out loud in the meeting.</div>';
+  obs.forEach(function(o){
+    h+='<div class="obs'+(o.flag?' flag':'')+'"><h3>'+o.h+'</h3><p>'+o.p+'</p><ul>'+
+       o.q.map(function(q){return '<li>'+q+'</li>';}).join('')+'</ul></div>';
+  });
+
+  /* questions */
+  var qs=[];
+  obs.forEach(function(o){ o.q.forEach(function(q){ qs.push(q); }); });
+  UNIVERSAL.forEach(function(q){ qs.push(q); });
+  h+='<div class="qbox"><h3>Bring these to the meeting</h3>'+
+     '<p class="hint">Your questions, in order. Print this page or copy the list — then ask them one at a time and write down the answers as you go.</p>'+
+     '<ol>'+qs.map(function(q){return '<li>'+q+'</li>';}).join('')+'</ol></div>';
+
+  h+='<div class="btnrow noprint">'+
+     '<button class="btn sm" id="dl">&#11015; Download my report</button>'+
+     '<button class="btn sm" id="prt">Print / save as PDF</button>'+
+     '<button class="btn sm ghost" id="cpy">Copy the question list</button>'+
+     '<button class="btn sm ghost" id="again">← Change my scores</button>'+
+     '</div>';
+
+  h+='<div class="obs" style="border-color:var(--brand)"><h3>Keep going: the full Toolkit</h3><p>This translator is the free half of <b>The Reading Evaluation Toolkit</b>. The full kit adds the 12-prompt evaluation-prep pack (notification letters, meeting scripts, follow-up emails) and the Notion workspace that keeps every report, meeting and deadline in one place.</p><p style="margin-top:8px"><a href="https://upleveldliving.gumroad.com/l/reading" style="font-weight:800">See the full kit &rarr;</a></p></div>';
+  h+='<p class="disclaimer"><b>Please read:</b> This tool translates standardized test terminology into plain language and helps you prepare questions. It is <b>not</b> a diagnosis, an assessment, or medical, psychological, or educational advice, and it does not evaluate your child. Test scores can only be interpreted by a qualified evaluator who has the full report, your child\'s history, and direct observation. Score ranges and descriptive labels vary by publisher and edition, and eligibility rules and timelines vary by state and by district. Always confirm what your report means with the professional who wrote it.</p>';
+
+  host.innerHTML=h;
+  host.classList.remove('hide');
+  document.getElementById('s2').classList.add('hide');
+  window.scrollTo(0,0);
+
+  document.getElementById('prt').addEventListener('click',function(){ window.print(); });
+  document.getElementById('dl').addEventListener('click',function(){
+    var d=new Date();
+    function p(n){return (n<10?'0':'')+n;}
+    var iso=d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+    var nice=d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+    /* clone the rendered report, drop the interactive chrome */
+    var clone=document.getElementById('results').cloneNode(true);
+    [].slice.call(clone.querySelectorAll('.noprint,.btnrow')).forEach(function(n){ n.parentNode.removeChild(n); });
+    /* carry the page's own stylesheet so the file renders identically */
+    var css=document.querySelector('style').textContent;
+    var doc='<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">'+
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0">'+
+      '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; base-uri \'none\'; form-action \'none\'">'+
+      '<title>Reading evaluation, translated \u2014 '+iso+'</title>'+
+      '<style>'+css+'\n#results{display:block!important}.hide{display:block!important}</style></head><body>'+
+      '<header><div class="wrap">'+
+      '<span class="eyebrow">Reading Evaluation Toolkit</span>'+
+      '<h1>Your report, translated</h1>'+
+      '<p class="sub">Prepared '+nice+' \u00b7 yours to keep, print and bring to the meeting.</p>'+
+      '</div></header>'+
+      '<div class="wrap"><div id="results">'+clone.innerHTML+'</div></div></body></html>';
+    var blob=new Blob([doc],{type:'text/html;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url; a.download='reading-score-translation-'+iso+'.html';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); },0);
+    var b=document.getElementById('dl'), old=b.textContent;
+    b.textContent='\u2713 Saved to your downloads'; b.disabled=true;
+    setTimeout(function(){ b.textContent=old; b.disabled=false; },2200);
+  });
+  document.getElementById('again').addEventListener('click',function(){
+    host.classList.add('hide');
+    document.getElementById('s2').classList.remove('hide');
+    window.scrollTo(0,0);
+  });
+  document.getElementById('cpy').addEventListener('click',function(){
+    var txt='QUESTIONS FOR THE EVALUATION MEETING\n\n'+qs.map(function(q,i){return (i+1)+'. '+q;}).join('\n\n');
+    var ta=document.createElement('textarea');
+    ta.value=txt; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); this.textContent='Copied ✓'; }
+    catch(err){ this.textContent='Select and copy manually'; }
+    document.body.removeChild(ta);
+    var b=this; setTimeout(function(){ b.textContent='Copy the question list'; },2200);
+  });
+}
+
+})();
+</script>
+</body>
+</html>
