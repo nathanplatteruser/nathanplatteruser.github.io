@@ -92,6 +92,18 @@
   @media print{.progress,.actions,button,.opts,.upsell{display:none!important}body{background:#fff}section.card,li.item{border-color:#ccc}#intake{display:none}}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
   @media (max-width:560px){.wrap{padding:0 14px}section.card{padding:17px}h1{font-size:20px}}
+/*editorial-v2*/
+  h1,h2,h3,.rescard .nm,.phase h3{font-family:'Iowan Old Style','Palatino Linotype',Georgia,'Times New Roman',serif;letter-spacing:-.012em}
+  h1{font-weight:700}
+  body{-webkit-font-smoothing:antialiased}
+  header.top{border-top:4px solid #a8865a}
+  header{border-top:4px solid #a8865a}
+  .eyebrow{letter-spacing:.22em;font-weight:600}
+  .privacy{letter-spacing:.01em}
+  .primary,.btn{border-radius:9px;letter-spacing:.015em}
+  .stepnum{letter-spacing:.2em}
+  .tag,.badge,.kicker{letter-spacing:.08em}
+  .when{letter-spacing:.09em}
 </style>
 </head>
 <body>
@@ -381,38 +393,50 @@ function artText(){
 
 function artHTML(){
   var s=artStamp(), title=(document.title||"My checklist").trim();
-  var css="body{font:15px/1.55 -apple-system,'Segoe UI',system-ui,Roboto,Helvetica,Arial,sans-serif;"+
-    "color:#1f2422;background:#fff;max-width:760px;margin:0 auto;padding:34px 26px 60px}"+
-    "h1{font-size:25px;margin:0 0 4px;letter-spacing:-.02em}"+
-    ".stamp{color:#6b736d;font-size:13px;margin-bottom:26px}"+
-    "h2{font-size:17px;margin:30px 0 3px;letter-spacing:-.01em}"+
-    ".when{display:inline-block;background:#eef3f0;color:#2c5544;font-size:11px;font-weight:700;"+
-      "text-transform:uppercase;letter-spacing:.07em;padding:3px 9px;border-radius:99px;margin-right:8px}"+
-    ".pdesc{color:#5c655f;font-size:14px;margin:4px 0 12px}"+
-    "ul{list-style:none;padding:0;margin:0}"+
-    "li{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid #ecefe9;page-break-inside:avoid}"+
-    "li input{margin-top:3px;width:16px;height:16px;flex:none}"+
-    ".it{font-weight:650}.id{color:#5c655f;font-size:13.5px;margin-top:2px}"+
-    ".tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;"+
-      "background:#fbf3e3;color:#7a5a20;margin-top:6px}"+
-    ".note{border-bottom:1px dotted #c9cfc8;height:19px;margin-top:9px}"+
-    "table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}"+
-    "th,td{border:1px solid #d8ddd7;padding:8px 9px;text-align:left}"+
-    "th{background:#f4f6f3;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#5c655f}"+
-    "td{height:31px}"+
-    ".ans{border-collapse:collapse;width:100%;font-size:13.5px;margin-bottom:6px}"+
-    ".ans td{border:0;border-bottom:1px solid #eef0ec;padding:6px 0;vertical-align:top}"+
-    ".ans td:first-child{color:#5c655f;width:58%;padding-right:18px}"+
-    ".ans td:last-child{font-weight:650}"+
-    "footer{margin-top:34px;padding-top:16px;border-top:1px solid #e4e2dd;color:#7d857f;font-size:12.5px}"+
+  var SER="'Iowan Old Style','Palatino Linotype',Georgia,'Times New Roman',serif";
+  var css="body{font:15px/1.6 "+SER+";"+
+    "color:#20241f;background:#faf7f2;max-width:730px;margin:0 auto;padding:40px 30px 64px;"+
+    "-webkit-font-smoothing:antialiased}"+
+    ".masthead{border-top:4px solid #a8865a;padding-top:18px}"+
+    ".kick{font:600 10.5px/1 -apple-system,'Segoe UI',system-ui,sans-serif;letter-spacing:.24em;"+
+      "text-transform:uppercase;color:#8a8478;margin-bottom:12px}"+
+    "h1{font-size:31px;line-height:1.12;margin:0 0 6px;letter-spacing:-.015em;font-weight:700}"+
+    ".stamp{font-style:italic;color:#6b7268;font-size:14px;margin-bottom:8px}"+
+    ".mrule{height:1px;background:#ddd6c9;margin:22px 0 4px}"+
+    "h2{font-size:19px;margin:34px 0 3px;letter-spacing:-.01em;font-weight:700}"+
+    ".when{display:inline-block;background:transparent;color:#8a8478;font:600 10px/1 -apple-system,'Segoe UI',system-ui,sans-serif;"+
+      "text-transform:uppercase;letter-spacing:.2em;padding:0;margin-right:10px;vertical-align:2px}"+
+    ".pdesc{color:#575d55;font-size:14px;font-style:italic;margin:5px 0 12px}"+
+    "ul{list-style:none;padding:0;margin:0;border-top:2px solid #20241f}"+
+    "li{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #e2dccf;page-break-inside:avoid}"+
+    "li input{margin-top:4px;width:15px;height:15px;flex:none;accent-color:#3f5b4d}"+
+    ".it{font-weight:700}.id{color:#575d55;font-size:13.5px;margin-top:2px}"+
+    ".tag{display:inline-block;font:600 10px/1 -apple-system,'Segoe UI',system-ui,sans-serif;"+
+      "letter-spacing:.12em;text-transform:uppercase;padding:3px 0;color:#a8865a;margin-top:7px}"+
+    ".note{border-bottom:1px solid #cfc8b8;height:20px;margin-top:10px}"+
+    "table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13.5px}"+
+    "th{border-bottom:2px solid #20241f;padding:7px 9px;text-align:left;"+
+      "font:600 10px/1.3 -apple-system,'Segoe UI',system-ui,sans-serif;text-transform:uppercase;"+
+      "letter-spacing:.14em;color:#575d55}"+
+    "td{border-bottom:1px solid #e2dccf;padding:8px 9px;height:30px}"+
+    ".ans{border-collapse:collapse;width:100%;font-size:14px;margin-bottom:6px;margin-top:10px}"+
+    ".ans td{border:0;border-bottom:1px solid #eee8db;padding:7px 0;vertical-align:top;height:auto}"+
+    ".ans td:first-child{color:#575d55;width:58%;padding-right:18px;font-style:italic}"+
+    ".ans td:last-child{font-weight:700}"+
+    "footer{margin-top:40px;padding-top:14px;border-top:1px solid #ddd6c9;color:#8a8478;"+
+      "font-size:12.5px;font-style:italic;line-height:1.6}"+
+    ".fmark{font:600 10px/1 -apple-system,'Segoe UI',system-ui,sans-serif;letter-spacing:.2em;"+
+      "text-transform:uppercase;color:#a8865a;margin-top:10px;font-style:normal}"+
     "@media print{body{padding:0;max-width:none}h2{page-break-after:avoid}.note{border-color:#999}}";
 
   var H=['<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">',
          '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
          '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; base-uri \'none\'; form-action \'none\'">',
          "<title>"+aesc(title)+" — "+s.iso+"</title><style>"+css+"</style></head><body>",
+         "<div class='masthead'><div class='kick'>One organized place · Personal working copy</div>",
          "<h1>"+aesc(title)+"</h1>",
-         '<div class="stamp">Prepared '+aesc(s.nice)+" · yours to keep, edit and print</div>"];
+         '<div class="stamp">Prepared '+aesc(s.nice)+" · yours to keep, edit and print</div>",
+         "<div class='mrule'></div></div>"];
 
   var a=artAnswers();
   if(a.length){
@@ -444,7 +468,8 @@ function artHTML(){
   H.push("</table>");
 
   var f=document.querySelector("#result .foot");
-  H.push("<footer>"+aesc(f?f.textContent.replace(/\s+/g," ").trim():"")+"</footer>");
+  H.push("<footer>"+aesc(f?f.textContent.replace(/\s+/g," ").trim():"")+
+        "<div class='fmark'>One organized place.</div></footer>");
   H.push("</body></html>");
   return H.join("");
 }
