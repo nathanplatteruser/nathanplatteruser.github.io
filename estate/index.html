@@ -629,5 +629,7 @@ document.getElementById("restart").addEventListener("click", function(){
   window.scrollTo({top:0,behavior:"smooth"});
 });
 </script>
+<script>/* utm-forward: carry Pinterest UTMs through to the Gumroad CTA for attribution */
+(function(){document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href*='gumroad.com']");if(!a)return;var q=location.search;if(!q||q.indexOf("utm_")<0)return;try{var u=new URL(a.href);new URLSearchParams(q.slice(1)).forEach(function(v,k){if(k.indexOf("utm_")===0&&!u.searchParams.has(k))u.searchParams.set(k,v);});a.href=u.toString();}catch(_){}} ,true);})();</script>
 </body>
 </html>
