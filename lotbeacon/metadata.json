@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "lotbeacon.preview.v2",
+  "buildId": "2026.09.04-exception-trends",
+  "dataClassification": "SYNTHETIC_DEMO_DATA",
+  "customerDataIncluded": false,
+  "inventoryDataIncluded": "synthetic sample feed",
+  "performanceClaims": "illustrative hypotheses only; no pilot result is represented",
+  "operatingMode": "draft-only; named human sends; no autonomous sends",
+  "communicationSignal": {
+    "windowPoints": 8,
+    "dimensions": ["purchaseIntent", "friction", "engagement", "appointmentProgress"],
+    "speakerAware": true,
+    "stageAware": true,
+    "queueDisplay": "exception-only",
+    "minimumVisibleConfidence": 0.76,
+    "neutralSignalsHidden": true
+  },
+  "sourceOfTruthPolicy": {
+    "liveAvailability": "requires dealership verification",
+    "pricingAuthority": "requires an authorized human decision",
+    "appointmentConfirmation": "requires an explicit time and successful calendar write",
+    "financing": "never inferred or promised by the demo"
+  }
+}
