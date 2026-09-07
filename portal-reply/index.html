@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="theme-color" content="#12110f"/>
-<title>PortalReply · SettleUp module · CFPB portal pack</title>
+<title>PortalReply · SU-SIB-2 · CFPB portal response pack</title>
 <meta name="description" content="CFPB Company Portal response pack module for SettleUp. Cite-to-file draft, Day-15 clock, refuse if facts missing. Not legal advice."/>
 <link rel="stylesheet" href="assets/ink.css"/>
 <style>
@@ -53,36 +53,120 @@
   </div>
 
   <div class="grid-2" style="margin-top:1rem">
-<div class="price-card price-card--primary">
+    <div class="panel" id="panel-complaint">
+      <h3>Synthetic CFPB complaint</h3>
+      <div class="sample" id="complaint-sample"><span class="watermark">DEMO · SYNTHETIC</span>
+Loading…</div>
+    </div>
+    <div class="panel" id="panel-account">
+      <h3>Thin account file</h3>
+      <div class="sample" id="account-sample"><span class="watermark">DEMO · ACCOUNT</span>
+Loading…</div>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:1rem;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+    <div class="panel" id="panel-clock">
+      <h3>Day-15 clock</h3>
+      <p class="clock" id="clock">15d 00h</p>
+      <p class="small muted" id="clock-note">Received: synthetic Sep 1 · Due: Sep 16 (illustrative)</p>
+      <h3 style="margin-top:1.2rem">File artifacts</h3>
+      <ul class="file-list" id="artifacts">
+        <li>Complaint PDF (synthetic)</li>
+        <li>Account timeline CSV</li>
+        <li>Prior validation notice</li>
+        <li>Payment ledger excerpt</li>
+      </ul>
+    </div>
+    <div class="panel" id="panel-output">
+      <h3>Work product</h3>
+      <div class="sample" id="output"><span class="watermark">DEMO · SYNTHETIC · NOT A REAL PORTAL FILING</span>
+Loading sample…</div>
+      <div class="gap-list" id="gap-list"></div>
+      <div class="hitl-box" id="hitl-box">
+        <label>
+          <input type="checkbox" id="hitl-approve" />
+          <span><strong>HITL approve</strong> — I reviewed cites against the account file. Ready to paste into Company Portal.<span class="hitl-lock-msg" id="hitl-lock-msg">HITL blocked while REFUSE is active</span></span>
+        </label>
+      </div>
+      <div class="btn-row" style="margin-top:1rem">
+        <button type="button" class="btn" id="btn-copy" disabled>Copy for portal</button>
+        <a class="btn btn-ghost" href="mailto:nathanplatter@gmail.com?subject=PortalReply%20module">Module mailto</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section" id="compare"><div class="wrap">
+  <p class="eyebrow">DP-01 · Compare (honest)</p>
+  <h2>Alongside — not instead of — complaint platforms</h2>
+  <p class="small muted">PortalReply = cite-to-file refuse pack. Not a Civica/Tratta/CMS replacement.</p>
+  <div class="compare-grid">
+    <article class="compare-chip status-quo">
+      <span class="chip-tag">Status quo</span>
+      <h3>Word + shared inbox</h3>
+      <p>Paste into CFPB Company Portal under Day-15 heat. Easy to ship thin or late answers when the file is incomplete.</p>
+      <div class="chip-traits">
+        <span class="trait">Manual paste</span>
+        <span class="trait no">No refuse gate</span>
+        <span class="trait no">Cite optional</span>
+      </div>
+    </article>
+    <article class="compare-chip enterprise">
+      <span class="chip-tag">Civica · Tratta · CMS</span>
+      <h3>Full complaint platforms</h3>
+      <p>Strong when you buy the whole case tool. Heavy for ARM shops that only need a portal response pack beside SettleUp.</p>
+      <div class="chip-traits">
+        <span class="trait">Tickets / CMS</span>
+        <span class="trait">Workflow depth</span>
+        <span class="trait no">Overkill for pack-only</span>
+      </div>
+    </article>
+    <article class="compare-chip ours">
+      <span class="chip-tag">PortalReply · this module</span>
+      <h3>Cite-to-file refuse pack</h3>
+      <p>Narrow agentic draft + hard REFUSE if facts missing + HITL. Human still Submits in the portal. Suite attach to Pilot — not a complaints CMS.</p>
+      <div class="chip-traits">
+        <span class="trait yes">Cite-to-file</span>
+        <span class="trait yes">Hard REFUSE</span>
+        <span class="trait yes">HITL owns Submit</span>
+      </div>
+    </article>
+  </div>
+  <div class="compare-footnote">
+    <strong>What we refuse to claim:</strong> No “CFPB-approved.” No API write-back. No autonomous Submit. Resilience demo = tap Missing facts → REFUSE and watch copy lock.
+  </div>
+</div></section>
+
+<section class="section" id="pricing"><div class="wrap">
+  <p class="eyebrow">Soft ROI · labeled assumptions only</p>
+  <h2>Pilot $499/mo · Ops $999/mo</h2>
+  <div class="grid-2" style="margin-top:1rem;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+    <div class="price-card price-card--primary">
       <p class="eyebrow" style="margin:0">Pilot seat</p>
       <p class="amount">$499<span class="small muted"> / mo</span></p>
       <p class="small muted">Deep-link SettleUp Pilot checkout. PortalReply rides as suite module (convergence &gt; purity).</p>
       <p class="small muted">ROT example (assumption): ~8 complaints/mo × ~1.9 hrs saved × $75/hr ≈ $1,140 labor vs $499 ≈ <strong>~2.3×</strong> labor-only — stretch with avoided fire-drills. Not a guarantee.</p>
       <div class="btn-row"><a class="btn" href="https://buy.stripe.com/dRm00j0GG53F8dVfO17Vm03" target="_blank" rel="noopener">Pilot $499 checkout</a></div>
     </div>
-    
-<div class="price-card">
-      <p class="eyebrow" style="margin:0">Ops seat</p>
+    <div class="price-card">
+      <p class="eyebrow" style="margin:0">Ops seat (optional)</p>
       <p class="amount">$999<span class="small muted"> / mo</span></p>
       <p class="small muted">Higher complaint volume. Mailto for now — magnet Stripe HOLD pattern.</p>
       <div class="btn-row"><a class="btn btn-ghost" href="mailto:nathanplatter@gmail.com?subject=PortalReply%20Ops%20%24999">Ask Ops seat</a></div>
     </div>
-  
-<div class="price-card price-card--quiet">
+    <div class="price-card price-card--quiet">
       <p class="eyebrow" style="margin:0">Firm / multi-entity</p>
       <p class="amount">$1,999<span class="small muted"> / mo</span></p>
       <p class="small muted">Sibling Stripe HOLD — mailto. Soft ROI assumptions only.</p>
       <div class="btn-row"><a class="btn btn-ghost" href="mailto:nathanplatter@gmail.com?subject=PortalReply%20Firm%20%241999">Ask Firm</a></div>
     </div>
-    
-<div class="price-card price-card--quiet">
+    <div class="price-card price-card--quiet">
       <p class="eyebrow" style="margin:0">Portal Risk Audit</p>
       <p class="amount">$2,500<span class="small muted"> one-time</span></p>
       <p class="small muted">Week-4 kill watch: ≥1 paid audit OR ≥3 stranger pilots.</p>
       <div class="btn-row"><a class="btn btn-ghost" href="mailto:nathanplatter@gmail.com?subject=Portal%20Risk%20Audit%20%242500">Ask audit</a></div>
     </div>
-    
-</div>
+  </div>
 </div></section>
 
 <section class="section" id="rails"><div class="wrap">
