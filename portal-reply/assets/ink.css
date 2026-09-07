@@ -633,3 +633,4 @@ h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
 }
 .price-card--primary .amount{font-size:2.1rem}
 .site-header .mark .code{font-size:.7rem;opacity:.75;font-weight:500}
+/* brand hierarchy */ .price-card--quiet{opacity:.92} .price-card--quiet .amount{font-size:1.35rem}

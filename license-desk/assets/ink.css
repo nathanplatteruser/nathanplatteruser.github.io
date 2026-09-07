@@ -629,3 +629,6 @@ body.refuse-flash::after {
 }
 .price-card--primary .amount{font-size:2.1rem}
 .site-header .mark .code{font-size:.7rem;opacity:.75;font-weight:500}
+
+.btn-quiet{display:inline-flex;align-items:center;min-height:44px;padding:.35rem .2rem;font:inherit;font-size:.85rem;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;border:0;background:none}
+.btn-quiet:hover{color:var(--ink)}
