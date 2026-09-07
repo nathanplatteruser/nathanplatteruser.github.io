@@ -372,3 +372,260 @@ h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
 .toast{position:fixed;bottom:calc(1rem + var(--safe));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:.75rem 1.1rem;border-radius:var(--radius);z-index:30;display:none;max-width:min(92vw,28rem);text-align:center;font-size:.9rem;box-shadow:var(--shadow)}
 .toast.show{display:block}
 @media (max-width:640px){.hero{padding:1.75rem 0 1rem}.hero h1{font-size:1.55rem}}
+
+/* LICENSE Desk polish — DP-01 compare chips + DP-02 loud REFUSE */
+.demo-grid { grid-template-columns: 1fr; }
+@media (min-width: 720px) {
+  .demo-grid { grid-template-columns: 1.15fr 0.95fr; }
+}
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.65rem;
+}
+.panel-head h3 { margin: 0; }
+
+.refuse-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--gap-soft);
+  border: 2px solid var(--gap);
+  color: var(--gap);
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 0 0 3px rgba(107, 58, 50, 0.12);
+}
+.refuse-banner[hidden] { display: none !important; }
+.refuse-stamp {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 2px solid var(--gap);
+  padding: 0.35rem 0.55rem;
+  background: #fff;
+  color: var(--gap);
+  transform: rotate(-3deg);
+  font-weight: 600;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+.gate-chip {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--line-strong);
+  background: var(--paper-2);
+  color: var(--ink-3);
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+.gate-chip.ok {
+  color: var(--ok);
+  border-color: #9bb896;
+  background: var(--ok-soft);
+}
+.gate-chip.miss {
+  color: var(--gap);
+  border-color: #d4a99f;
+  background: var(--gap-soft);
+  font-weight: 600;
+}
+
+.fake-done {
+  margin-top: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px dashed #d4a99f;
+  background: #fff8f6;
+}
+.fake-check-row {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  cursor: pointer;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  min-height: 44px;
+}
+.fake-check-row input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  accent-color: var(--gap);
+}
+
+.btn-danger {
+  background: var(--gap);
+  border-color: var(--gap);
+  color: #fffefb;
+}
+.btn-danger:hover {
+  background: #5a2f29;
+  color: #fffefb;
+}
+
+.panel-refuse {
+  border-color: var(--gap) !important;
+  box-shadow: 0 0 0 2px rgba(107, 58, 50, 0.2), var(--shadow);
+  animation: refuse-shake 0.45s ease;
+}
+@keyframes refuse-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+body.refuse-flash::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(107, 58, 50, 0.08);
+  z-index: 25;
+  animation: refuse-veil 0.9s ease forwards;
+}
+@keyframes refuse-veil {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.toast-refuse {
+  background: var(--gap) !important;
+  color: #fffefb !important;
+  border: 2px solid #3f221e;
+  font-weight: 600;
+}
+.toast-ok {
+  background: var(--ok) !important;
+  color: #fffefb !important;
+}
+
+.result-refuse {
+  color: var(--gap) !important;
+  font-weight: 600;
+}
+.result-ok {
+  color: var(--ok) !important;
+  font-weight: 500;
+}
+
+/* DP-01 compare cards */
+.compare-grid {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 800px) {
+  .compare-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.compare-card {
+  background: #fffefb;
+  border: 1px solid var(--line);
+  padding: 1.1rem 1.15rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 100%;
+}
+.compare-card-hero {
+  border-color: var(--ink);
+  background: linear-gradient(180deg, #fffefb 0%, var(--ok-soft) 140%);
+}
+.compare-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.compare-top h3 { margin: 0; flex: 1; min-width: 8rem; }
+.compare-chips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.compare-chips .chip {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--line-strong);
+  background: var(--paper-2);
+  color: var(--ink-3);
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+}
+.compare-chips .chip.ok {
+  color: var(--ok);
+  border-color: #9bb896;
+  background: var(--ok-soft);
+}
+.compare-chips .chip.weak {
+  color: var(--warn);
+  border-color: #d4c19a;
+  background: var(--warn-soft);
+}
+.compare-chips .chip.miss {
+  color: var(--gap);
+  border-color: #d4a99f;
+  background: var(--gap-soft);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+/* iPhone tap targets — tabs already ≥44px; reinforce nav + chips rows */
+.tabs button { min-height: 44px; min-width: 44px; }
+.nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.15rem;
+}
+.hitl-box label { min-height: 44px; }
+
+
+/* Brand hierarchy nits 2026-09-07 */
+.suite-chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  margin:0 0 1rem;padding:.4rem .7rem;min-height:44px;
+  border:1px solid var(--line-strong);border-radius:999px;
+  background:#fffefb;font-family:var(--font-mono);font-size:.72rem;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);
+}
+.suite-chip-brand{font-weight:600;color:var(--ink)}
+.suite-chip-plus{opacity:.45}
+.suite-chip-mod{font-weight:600;color:var(--ok)}
+.price-card--primary{
+  border:2px solid var(--ink)!important;
+  box-shadow:var(--shadow),0 0 0 4px rgba(18,17,15,.04);
+  padding:1.35rem 1.25rem!important;
+}
+.price-card--primary .amount{font-size:2.1rem}
+.site-header .mark .code{font-size:.7rem;opacity:.75;font-weight:500}
