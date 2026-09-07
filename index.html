@@ -1,135 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
-<title>Free tools for the weeks nobody prepares you for</title>
-<meta name="description" content="Three free browser tools for three hard situations: reading evaluations, settling an estate, and starting a divorce. No account, no email, nothing stored.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Free tools for the weeks nobody prepares you for">
-<meta property="og:description" content="Three free browser tools for three hard situations: reading evaluations, settling an estate, and starting a divorce. No account, no email, nothing stored.">
-<meta property="og:url" content="https://nathanplatteruser.github.io/">
-<link rel="canonical" href="https://nathanplatteruser.github.io/">
-<meta property="og:image" content="https://nathanplatteruser.github.io/img/cover-reading.png">
-<meta name="twitter:card" content="summary_large_image">
-<style>
-  :root{
-    --bg:#FBF7F0;--card:#fff;--ink:#33372F;--muted:#5c6157;--faint:#8F887A;
-    --line:#EAE3D5;--line-strong:#DDD3C0;
-    --reading:#6E9080;--reading-soft:#EAF1EC;
-    --estate:#6E8C6A;--estate-soft:#EDF1EA;
-    --divorce:#6E86A8;--divorce-soft:#ECF0F6;
-    --sans:-apple-system,"Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0}
-  html{-webkit-text-size-adjust:100%}
-  body{background:var(--bg);color:var(--ink);font:16.5px/1.62 var(--sans);padding-bottom:70px}
-  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
-  h1,h2{letter-spacing:-.018em;line-height:1.22}
-  a{color:inherit}
-
-  header{padding:56px 0 34px}
-  .eyebrow{color:var(--faint);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.1em}
-  h1{font-size:31px;font-weight:800;margin:11px 0 0;max-width:15ch}
-  .sub{color:var(--muted);font-size:17px;margin-top:14px;max-width:54ch}
-  .privacy{display:inline-block;margin-top:18px;background:#fff;border:1px solid var(--line-strong);
-    color:var(--muted);font-size:13.5px;padding:7px 14px;border-radius:99px}
-
-  .cards{display:grid;gap:16px;margin-top:8px}
-  .c{display:block;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--bar);
-    border-radius:13px;padding:22px 24px;text-decoration:none;transition:border-color .13s,transform .13s,box-shadow .13s}
-  .c:hover{border-color:var(--line-strong);border-left-color:var(--bar);transform:translateY(-1px);
-    box-shadow:0 4px 16px rgba(20,30,25,.06)}
-  .c .kicker{color:var(--bar);font-weight:750;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
-  .c h2{font-size:21px;font-weight:750;margin:7px 0 0}
-  .c p{color:var(--muted);font-size:15.5px;margin-top:9px}
-  .c .go{display:inline-block;margin-top:14px;color:var(--bar);font-weight:700;font-size:15px}
-
-  .r{--bar:var(--reading)}
-  .e{--bar:var(--estate)}
-  .d{--bar:var(--divorce)}
-
-  .why{background:#fff;border:1px solid var(--line);border-radius:13px;padding:24px;margin-top:26px}
-  .why h2{font-size:18px;font-weight:750}
-  .why p{color:var(--muted);font-size:15.5px;margin-top:10px}
-
-  footer{color:var(--faint);font-size:13.5px;line-height:1.6;margin-top:30px;
-    border-top:1px solid var(--line);padding-top:22px}
-  footer p+p{margin-top:10px}
-
-  @media(max-width:520px){h1{font-size:26px}header{padding:40px 0 26px}}
-/*editorial-v2*/
-  h1,h2{font-family:'Iowan Old Style','Palatino Linotype',Georgia,'Times New Roman',serif}
-  body{border-top:5px solid #B8925E;-webkit-font-smoothing:antialiased}
-  .eyebrow{letter-spacing:.22em;font-weight:600;color:#B8925E}
-  .c{border-radius:15px}
-  .c .kicker{letter-spacing:.14em}
-  .privacy{background:#F3EEDF;border-color:#E3D9C2;border-radius:14px}
-  .why{border-radius:15px;border-left:5px solid #C7B9D8}
-</style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#12110f"/>
+<title>Nathan Platter · Principal Analytics &amp; AI · ships SettleUp + LotBeacon</title>
+<meta name="description" content="Principal Analytics & AI · Revenue & GTM. Bootstrap founder who ships. SettleUp suite, LotBeacon, live demos. One link for proof of work."/>
+<link rel="canonical" href="https://nathanplatteruser.github.io/"/>
+<meta property="og:title" content="Nathan Platter · Principal Analytics & AI"/>
+<meta property="og:description" content="Revenue & GTM intelligence. SettleUp suite + LotBeacon. Live demos. Soft ROI. Growth partner."/>
+<meta property="og:url" content="https://nathanplatteruser.github.io/"/>
+<link rel="stylesheet" href="assets/hub.css"/>
 </head>
 <body>
-<div class="wrap">
+<header class="site-header"><div class="inner wrap">
+  <a class="mark" href="#home">Nathan Platter <span class="code">Platter Analytics</span></a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#outcomes">Outcomes</a>
+    <a href="#engage">Engage</a>
+    <a href="#socials">Socials</a>
+    <a href="#lab">Lab</a>
+  </nav>
+</div></header>
 
-<header>
-  <div class="eyebrow">Free · no account · nothing stored</div>
-  <h1>Free tools for the weeks nobody prepares you for</h1>
-  <p class="sub">Three situations that arrive without warning and hand you a pile of paperwork.
-     Each tool below asks you a few questions and gives you back a starting point — the specific
-     first things to do, in order, for your situation.</p>
-  <span class="privacy">Everything runs inside your browser. You can turn off your wifi and it still works.</span>
-</header>
+<main>
+<section class="hero" id="home"><div class="wrap">
+  <p class="eyebrow">Principal Analytics &amp; AI · Revenue &amp; GTM</p>
+  <h1>Bootstrap founder who ships vertical SaaS with refuse-over-hallucinate DNA.</h1>
+  <p class="lede">I build decision systems and product surfaces that move cash and capacity — not dashboard sprawl. One link for professors, operators, and conference follow-ups. Destination updates as we ship.</p>
+  <div class="btn-row">
+    <a class="btn" href="https://calendly.com/nathanplatter" target="_blank" rel="noopener">Book time</a>
+    <a class="btn btn-ghost" href="#work">See live demos</a>
+    <a class="btn btn-ghost" href="mailto:NathanPlatter@gmail.com">Email</a>
+  </div>
+</div></section>
 
-<div class="cards">
+<section class="section" id="about"><div class="wrap">
+  <p class="eyebrow">About</p>
+  <h2>Brought in when numbers aren’t trusted, AI stalls, or teams ship output instead of outcomes.</h2>
+  <p class="lede">Player-coach analytics and GTM intelligence. Thorough intake → trusted metrics → executive reporting. Domain fluency across collections / dispute workflows and dealership sales ops — without pretending bots replace judgment.</p>
+  <div class="rail"><strong>Viable participant:</strong> leadership needs decision confidence · attribution won’t reconcile · agentic tools need HITL refuse gates · booth / Zoom needs a single proof link. Not Dell day-job theater. Minneapolis · MBA Data Analytics &amp; Marketing (LSU).</div>
+</div></section>
 
-  <a class="c r" href="reading/">
-    <div class="kicker">For parents</div>
-    <h2>Reading Evaluation Score Translator</h2>
-    <p>You have a twenty-page evaluation report full of numbers and nobody has explained any of it.
-       Type in the scores — it tells you what each test measures, what it does <b>not</b> measure,
-       and the questions worth asking at the meeting.</p>
-    <span class="go">Translate my scores &rarr;</span>
-  </a>
+<section class="section" id="work"><div class="wrap">
+  <p class="eyebrow">Work / Invented</p>
+  <h2>Live demos — SettleUp is the perfect SaaS; siblings are suite modules.</h2>
+  <p class="small muted">Demo Playbook bar on every card: what it is · what it does · honest compare · soft ROI (labeled) · interactive demo · suite line. Sibling Stripe HOLD on magnets.</p>
+  <div class="card-grid">
 
-  <a class="c e" href="estate/">
-    <div class="kicker">For executors</div>
-    <h2>Executor Starting-Point Checklist</h2>
-    <p>Someone died, you're the one handling it, and there is no instruction manual.
-       Answer a few questions and get the first moves that are actually time-sensitive,
-       separated from the ones that can wait.</p>
-    <span class="go">Get my first steps &rarr;</span>
-  </a>
+    <article class="work-card">
+      <p class="meta">Core aisle · SettleUp</p>
+      <h3>SettleUp Collections</h3>
+      <p class="small muted">Dispute-letter Level-4 refuse gate for collection agencies / counsel. Human owns Send.</p>
+      <p class="small muted"><strong>Compare:</strong> not a CMS letter printer — cite-to-file refuse when ledger can’t support the claim.</p>
+      <p class="small muted"><strong>Soft ROI:</strong> Pilot $499/mo live checkout (growth partner frame; assumptions labeled on pricing pages).</p>
+      <div class="chips"><span class="chip live">LIVE</span><span class="chip">Pilot $499</span></div>
+      <div class="cta-row">
+        <a class="btn" href="https://buy.stripe.com/dRm00j0GG53F8dVfO17Vm03" target="_blank" rel="noopener">Pilot checkout</a>
+      </div>
+    </article>
 
-  <a class="c d" href="divorce/">
-    <div class="kicker">For anyone starting one</div>
-    <h2>Divorce Starting-Point Checklist</h2>
-    <p>Everyone has advice and none of it is in order. This gives you a personalized list of
-       what to gather, what to hold off on, and what to write down before you pay anyone
-       by the hour.</p>
-    <span class="go">Get my first steps &rarr;</span>
-  </a>
+    <article class="work-card">
+      <p class="meta">Suite module</p>
+      <h3>COLLECT QA Seat</h3>
+      <p class="small muted">Outbound validation-notice / itemization hygiene. Cited Reg F gaps · HITL · REFUSE when facts missing.</p>
+      <p class="small muted"><strong>Compare:</strong> not AMS replacement · not separate brand — attaches to Pilot aisle.</p>
+      <p class="small muted"><strong>Soft ROI:</strong> Seat $249 mailto · pack $29 mailto · Pilot $499 live.</p>
+      <div class="chips"><span class="chip live">LIVE</span><span class="chip">Suite</span></div>
+      <div class="cta-row"><a class="btn" href="https://nathanplatteruser.github.io/collect-qa-magnet/seat/">Open /seat/</a></div>
+    </article>
 
-</div>
+    <article class="work-card">
+      <p class="meta">Suite module</p>
+      <h3>PortalReply</h3>
+      <p class="small muted">CFPB Company Portal response pack. Day-15 clock · cite-to-file · hard REFUSE · HITL.</p>
+      <p class="small muted"><strong>Compare:</strong> not Civica/Tratta CMS — pack builder beside SettleUp.</p>
+      <div class="chips"><span class="chip live">LIVE</span><span class="chip">Breakable</span></div>
+      <div class="cta-row"><a class="btn" href="https://nathanplatteruser.github.io/portal-reply/">Open demo</a></div>
+    </article>
 
-<div class="why">
-  <h2>Why these are free</h2>
-  <p>Each one is the honest, useful half of a larger paid kit. If the free version is all you
-     need, take it and go — it's complete on its own, and there's no email wall in front of it.
-     If it helps and you want the full system, there's a link inside each tool. That's the
-     whole arrangement.</p>
-</div>
+    <article class="work-card">
+      <p class="meta">Suite module</p>
+      <h3>Counsel QA</h3>
+      <p class="small muted">Attorney demand / MVN cited gap report. Counsel outbound lane — not PI EvenUp.</p>
+      <p class="small muted"><strong>Soft ROI:</strong> Seat $599 · per-letter $35 · Pilot attach (labeled).</p>
+      <div class="chips"><span class="chip live">LIVE</span></div>
+      <div class="cta-row"><a class="btn" href="https://nathanplatteruser.github.io/counsel-qa/">Open demo</a></div>
+    </article>
 
-<footer>
-  <p>These are organizational and educational tools. They are not legal, medical, financial,
-     psychological, or educational-placement advice, and they do not evaluate you, your family
-     member, or your child. Only a qualified professional who knows your actual situation can
-     do that.</p>
-  <p>Processes, eligibility, and timelines vary by state and district, and they change. These
-     tools deliberately do not print deadlines. Confirm anything time-sensitive with a
-     professional or the relevant office where you live.</p>
-</footer>
+    <article class="work-card">
+      <p class="meta">Suite door-open</p>
+      <h3>LICENSE Desk</h3>
+      <p class="small muted">License + bond OPS chase — owner, evidence, escalate. Not a pretty calendar.</p>
+      <p class="small muted"><strong>Compare:</strong> Excel dates vs licensing CMS vs OPS chase (honest).</p>
+      <div class="chips"><span class="chip live">LIVE</span><span class="chip">Short leash</span></div>
+      <div class="cta-row"><a class="btn" href="https://nathanplatteruser.github.io/license-desk/">Open stub</a></div>
+    </article>
 
-</div>
+    <article class="work-card">
+      <p class="meta">Dealership · LotBeacon</p>
+      <h3>LotBeacon grok-demo</h3>
+      <p class="small muted">Messenger HITL walkthrough for dealership BDCs — phone-tap hardened.</p>
+      <div class="chips"><span class="chip live">LIVE</span></div>
+      <div class="cta-row"><a class="btn" href="https://nathanplatteruser.github.io/lotbeacon/grok-demo.html">60s demo</a></div>
+    </article>
+
+    <article class="work-card">
+      <p class="meta">Magnets · Sassy Tail</p>
+      <h3>COLLECT · SERVICE · TITLE</h3>
+      <p class="small muted">Bleed magnets: Reg F QA pack · process-server packs · Sch.B exceptions. Mailto Stripe HOLD.</p>
+      <div class="chips"><span class="chip live">Pages</span><span class="chip">HOLD Stripe</span></div>
+      <div class="cta-row">
+        <a class="btn btn-ghost" href="https://nathanplatteruser.github.io/collect-qa-magnet/">COLLECT</a>
+        <a class="btn btn-ghost" href="https://nathanplatteruser.github.io/service-packs-magnet/">SERVICE</a>
+        <a class="btn btn-ghost" href="https://nathanplatteruser.github.io/title-schb-magnet/">TITLE</a>
+      </div>
+    </article>
+
+    <article class="work-card">
+      <p class="meta">Wave B stubs</p>
+      <h3>Offer stubs hub</h3>
+      <p class="small muted">BIND-first paper/ink offer samples (≥6/10 depth). Kill lines + non-goals.</p>
+      <div class="chips"><span class="chip live">LIVE</span></div>
+      <div class="cta-row"><a class="btn" href="https://nathanplatteruser.github.io/wave-b-offer-stubs/">Open hub</a></div>
+    </article>
+
+  </div>
+</div></section>
+
+<section class="section" id="outcomes"><div class="wrap">
+  <p class="eyebrow">Outcomes</p>
+  <h2>Business outcomes from his materials — cited carefully, not peacock.</h2>
+  <ul class="nongoals">
+    <li><strong>Tubi:</strong> attribution coverage 62%→91%; $33M+ GNR influence; analysis cycles −77% (from founder materials).</li>
+    <li><strong>Peacock:</strong> partner onboarding 18× / −93% cycle; ad opportunity models in the $60–140M range (modeled).</li>
+    <li><strong>B2B SaaS contract:</strong> ~$8M incremental pipeline identified; ~20% shorter opp cycle; ~35% faster PBI loads.</li>
+    <li><strong>Farrell’s:</strong> operator P&amp;L discipline — exit when unit economics fail (operator proof).</li>
+  </ul>
+  <p class="small muted">Sources: LinkedIn/resume archive + verbal addenda in founder snapshot. Ask before quoting externally as press.</p>
+</div></section>
+
+<section class="section" id="engage"><div class="wrap">
+  <p class="eyebrow">Engage</p>
+  <h2>Brainstorm Denver · speaking · contributing.</h2>
+  <p class="lede">Brainstorm 2026 (Sep 9–11) — SettleUp booth aisle for collections / creditors’ rights. Open to professor / club / operator invites when the work is outcomes-shaped.</p>
+  <div class="btn-row">
+    <a class="btn" href="https://calendly.com/nathanplatter" target="_blank" rel="noopener">Calendly</a>
+    <a class="btn btn-ghost" href="mailto:NathanPlatter@gmail.com?subject=Speaking%20/%20contribute">Invite to speak</a>
+  </div>
+</div></section>
+
+<section class="section" id="socials"><div class="wrap">
+  <p class="eyebrow">Socials hub</p>
+  <h2>Find the work without a scavenger hunt.</h2>
+  <div class="socials">
+    <a class="btn btn-ghost" href="https://www.linkedin.com/in/nathan-platter" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn btn-ghost" href="https://nathan-platter-ppi2hvv.gamma.site" target="_blank" rel="noopener">Gamma site</a>
+    <a class="btn btn-ghost" href="https://gamma.app/docs/Nathan-Platter-MBA-nm119dmo60nbhza" target="_blank" rel="noopener">Gamma doc</a>
+    <a class="btn btn-ghost" href="https://www.salesforce.com/trailblazer/nathan-platter" target="_blank" rel="noopener">Trailblazer</a>
+    <a class="btn btn-ghost" href="https://www.loom.com/share/3eea07e99ba84665adab1870719be88d" target="_blank" rel="noopener">Loom</a>
+    <a class="btn btn-ghost" href="mailto:NathanPlatter@gmail.com">Email</a>
+  </div>
+</div></section>
+
+<section class="section" id="lab"><div class="wrap">
+  <p class="eyebrow">Lab</p>
+  <h2>Free tools + deep demo index.</h2>
+  <p class="small muted">Earlier browser tools (reading / estate / divorce) stay available. Product demos live in Work above.</p>
+  <div class="btn-row">
+    <a class="btn btn-ghost" href="reading/">Reading evals</a>
+    <a class="btn btn-ghost" href="estate/">Estate</a>
+    <a class="btn btn-ghost" href="divorce/">Divorce</a>
+    <a class="btn btn-ghost" href="lab/legacy-tools.html">Legacy tools hub</a>
+  </div>
+</div></section>
+</main>
+
+<div class="sticky-bar"><div class="inner wrap">
+  <span class="small muted">One link forever · updates as we ship</span>
+  <div class="btn-row">
+    <a class="btn" href="https://calendly.com/nathanplatter" target="_blank" rel="noopener">Book</a>
+    <a class="btn btn-ghost" href="#work">Demos</a>
+  </div>
+</div></div>
+
+<footer class="footer"><div class="wrap">
+  <p class="small muted">NP-HUB-1 · nathanplatteruser.github.io · product paths (/portal-reply/, /license-desk/, /counsel-qa/, magnets) untouched · not legal advice on suite demos</p>
+</div></footer>
 </body>
 </html>
