@@ -1,4 +1,4 @@
-# SU-SIB-2 PortalReply / INBOUND PACKET
+# SU-SIB-2 PortalReply / portal response pack
 
 Pages-ready static demo: CFPB Company Portal **response pack** for SettleUp buyers.
 
@@ -28,7 +28,7 @@ Or open `index.html` in a browser.
 ## Pricing
 
 - Pilot **$499/mo**: https://buy.stripe.com/dRm00j0GG53F8dVfO17Vm03
-- Ops **$999/mo**: mailto settleupcollections@polsia.app
+- Ops **$999/mo**: mailto nathanplatter@gmail.com
 - Soft ROI on page = labeled assumptions only
 
 ## Rails

@@ -8,14 +8,7 @@
 <meta name="description" content="CFPB Company Portal response pack module for SettleUp. Cite-to-file draft, Day-15 clock, refuse if facts missing. Not legal advice."/>
 <link rel="stylesheet" href="assets/ink.css"/>
 <style>
-.clock{font-variant-numeric:tabular-nums;font-size:1.6rem;font-weight:700;letter-spacing:.02em}
-.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
-.tabs button{appearance:none;border:1px solid #b8b0a2;background:#fffefb;color:#3a3732;padding:.65rem 1rem;border-radius:2px;font:inherit;font-weight:500;cursor:pointer;min-height:44px}
-.tabs button.active{background:#12110f;color:#f4f1ea;border-color:#12110f}
 .hidden{display:none!important}
-.toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:#1a1816;border:1px solid #5a554c;color:#e8e2d6;padding:.75rem 1rem;border-radius:10px;z-index:20;display:none}
-.toast.show{display:block}
-@media (max-width:640px){.hero h1{font-size:1.55rem}}
 </style>
 </head>
 <body>
@@ -30,7 +23,7 @@
 </div></header>
 <main>
 <section class="hero"><div class="wrap">
-  <p class="eyebrow">SU-SIB-2 · INBOUND PACKET · SettleUp tag-along</p>
+  <p class="eyebrow">PortalReply / CFPB portal pack · SettleUp suite module</p>
   <h1>CFPB portal packs that refuse when the file can’t support the story.</h1>
   <p class="lede">Ingest complaint + account file → Day-15 clock → cite-to-file draft → <strong>hard REFUSE</strong> if facts missing → HITL before paste into the Company Portal. Same aisle as SettleUp Pilot — not a complaints CMS.</p>
   <div class="btn-row">
@@ -40,31 +33,38 @@
 </div></section>
 
 <section class="section" id="rails-top"><div class="wrap">
-  <div class="rail"><strong>Module framing.</strong> Add-on to SettleUp Pilot refuse-gate · human still Submits in CFPB portal · not legal advice · no portal API write-back · not Civica/Tratta replacement.</div>
+  <div class="rail"><strong>Module framing.</strong> Add-on to SettleUp Pilot refuse-gate · human still Submits in CFPB portal · not legal advice · no portal API write-back · not Civica/Tratta replacement · cite-to-file refuse pack, not CMS.</div>
 </div></section>
 
 <section class="section" id="demo"><div class="wrap">
-  <p class="eyebrow">Interactive sample · synthetic</p>
+  <p class="eyebrow">Interactive sample · synthetic · DP-02 breakable</p>
   <h2>Complaint → clock → draft or REFUSE</h2>
-  <p class="small muted">DP-02 breakable path: tap <strong>Missing facts → REFUSE</strong>, then HITL copy — it must block. Soft conversion = resilience under stress.</p>
-  <div class="tabs" role="tablist">
-    <button type="button" class="active" data-mode="happy" id="tab-happy">Happy path</button>
-    <button type="button" data-mode="refuse" id="tab-refuse">Missing facts → REFUSE</button>
+  <p class="small muted">Breakable path: tap <strong>Missing facts → REFUSE</strong>. Gaps list loudly, copy locks, HITL blocks. Soft conversion = resilience under stress. Happy path stays clean.</p>
+  <div class="tabs" role="tablist" aria-label="Demo mode">
+    <button type="button" class="active" data-mode="happy" id="tab-happy" aria-pressed="true">Happy path</button>
+    <button type="button" data-mode="refuse" id="tab-refuse" aria-pressed="false">Missing facts → REFUSE</button>
   </div>
+
+  <div class="refuse-banner" id="refuse-banner" role="alert" aria-live="polite">
+    <p class="rb-kicker">Hard gate · refuse-over-hallucinate</p>
+    <p class="rb-title">REFUSED — facts missing</p>
+    <p class="rb-body">Copy locked · HITL blocked · do not paste into Company Portal until gaps close.</p>
+  </div>
+
   <div class="grid-2" style="margin-top:1rem">
-    <div class="panel">
+    <div class="panel" id="panel-complaint">
       <h3>Synthetic CFPB complaint</h3>
       <div class="sample" id="complaint-sample"><span class="watermark">DEMO · SYNTHETIC</span>
 Loading…</div>
     </div>
-    <div class="panel">
+    <div class="panel" id="panel-account">
       <h3>Thin account file</h3>
       <div class="sample" id="account-sample"><span class="watermark">DEMO · ACCOUNT</span>
 Loading…</div>
     </div>
   </div>
   <div class="grid-2" style="margin-top:1rem;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
-    <div class="panel">
+    <div class="panel" id="panel-clock">
       <h3>Day-15 clock</h3>
       <p class="clock" id="clock">15d 00h</p>
       <p class="small muted" id="clock-note">Received: synthetic Sep 1 · Due: Sep 16 (illustrative)</p>
@@ -76,45 +76,63 @@ Loading…</div>
         <li>Payment ledger excerpt</li>
       </ul>
     </div>
-    <div class="panel">
+    <div class="panel" id="panel-output">
       <h3>Work product</h3>
       <div class="sample" id="output"><span class="watermark">DEMO · SYNTHETIC · NOT A REAL PORTAL FILING</span>
 Loading sample…</div>
       <div class="gap-list" id="gap-list"></div>
       <div class="hitl-box" id="hitl-box">
-        <label><input type="checkbox" id="hitl-approve" />
-          <span><strong>HITL approve</strong> — I reviewed cites against the account file. Ready to paste into Company Portal.</span>
+        <label>
+          <input type="checkbox" id="hitl-approve" />
+          <span><strong>HITL approve</strong> — I reviewed cites against the account file. Ready to paste into Company Portal.<span class="hitl-lock-msg" id="hitl-lock-msg">HITL blocked while REFUSE is active</span></span>
         </label>
       </div>
       <div class="btn-row" style="margin-top:1rem">
         <button type="button" class="btn" id="btn-copy" disabled>Copy for portal</button>
-        <a class="btn btn-ghost" href="mailto:settleupcollections@polsia.app?subject=PortalReply%20module">Module mailto</a>
+        <a class="btn btn-ghost" href="mailto:nathanplatter@gmail.com?subject=PortalReply%20module">Module mailto</a>
       </div>
     </div>
   </div>
 </div></section>
 
-
 <section class="section" id="compare"><div class="wrap">
   <p class="eyebrow">DP-01 · Compare (honest)</p>
   <h2>Alongside — not instead of — complaint platforms</h2>
-  <div class="grid-2" style="margin-top:1rem;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
-    <div class="panel">
-      <h3>Status quo</h3>
-      <p class="small muted">Word + shared inbox + paste into CFPB Company Portal. Easy to ship thin/late answers under Day-15 heat.</p>
-    </div>
-    <div class="panel">
-      <h3>Enterprise / CMS</h3>
-      <p class="small muted">Civica, Tratta, full case tools — strong when you buy the platform. Heavy for ARM shops that only need a <strong>portal response pack</strong>.</p>
-    </div>
-    <div class="panel">
-      <h3>PortalReply (this module)</h3>
-      <p class="small muted">Narrow agentic draft + <strong>cite-to-file refuse</strong> + HITL. Human still Submits in the portal. Settles beside SettleUp Pilot — not a complaints CMS.</p>
-    </div>
-    <div class="panel">
-      <h3>What we refuse to claim</h3>
-      <p class="small muted">No “CFPB-approved.” No API write-back. No autonomous Submit. Resilience demo = try Missing facts → REFUSE and watch copy lock.</p>
-    </div>
+  <p class="small muted">PortalReply = cite-to-file refuse pack. Not a Civica/Tratta/CMS replacement.</p>
+  <div class="compare-grid">
+    <article class="compare-chip status-quo">
+      <span class="chip-tag">Status quo</span>
+      <h3>Word + shared inbox</h3>
+      <p>Paste into CFPB Company Portal under Day-15 heat. Easy to ship thin or late answers when the file is incomplete.</p>
+      <div class="chip-traits">
+        <span class="trait">Manual paste</span>
+        <span class="trait no">No refuse gate</span>
+        <span class="trait no">Cite optional</span>
+      </div>
+    </article>
+    <article class="compare-chip enterprise">
+      <span class="chip-tag">Civica · Tratta · CMS</span>
+      <h3>Full complaint platforms</h3>
+      <p>Strong when you buy the whole case tool. Heavy for ARM shops that only need a portal response pack beside SettleUp.</p>
+      <div class="chip-traits">
+        <span class="trait">Tickets / CMS</span>
+        <span class="trait">Workflow depth</span>
+        <span class="trait no">Overkill for pack-only</span>
+      </div>
+    </article>
+    <article class="compare-chip ours">
+      <span class="chip-tag">PortalReply · this module</span>
+      <h3>Cite-to-file refuse pack</h3>
+      <p>Narrow agentic draft + hard REFUSE if facts missing + HITL. Human still Submits in the portal. Suite attach to Pilot — not a complaints CMS.</p>
+      <div class="chip-traits">
+        <span class="trait yes">Cite-to-file</span>
+        <span class="trait yes">Hard REFUSE</span>
+        <span class="trait yes">HITL owns Submit</span>
+      </div>
+    </article>
+  </div>
+  <div class="compare-footnote">
+    <strong>What we refuse to claim:</strong> No “CFPB-approved.” No API write-back. No autonomous Submit. Resilience demo = tap Missing facts → REFUSE and watch copy lock.
   </div>
 </div></section>
 
@@ -133,19 +151,19 @@ Loading sample…</div>
       <p class="eyebrow" style="margin:0">Firm / multi-entity</p>
       <p class="amount">$1,999<span class="small muted"> / mo</span></p>
       <p class="small muted">Sibling Stripe HOLD — mailto. Soft ROI assumptions only.</p>
-      <div class="btn-row"><a class="btn btn-ghost" href="mailto:settleupcollections@polsia.app?subject=PortalReply%20Firm%20%241999">Ask Firm</a></div>
+      <div class="btn-row"><a class="btn btn-ghost" href="mailto:nathanplatter@gmail.com?subject=PortalReply%20Firm%20%241999">Ask Firm</a></div>
     </div>
     <div class="price-card">
       <p class="eyebrow" style="margin:0">Portal Risk Audit</p>
       <p class="amount">$2,500<span class="small muted"> one-time</span></p>
       <p class="small muted">Week-4 kill watch: ≥1 paid audit OR ≥3 stranger pilots.</p>
-      <div class="btn-row"><a class="btn btn-ghost" href="mailto:settleupcollections@polsia.app?subject=Portal%20Risk%20Audit%20%242500">Ask audit</a></div>
+      <div class="btn-row"><a class="btn btn-ghost" href="mailto:nathanplatter@gmail.com?subject=Portal%20Risk%20Audit%20%242500">Ask audit</a></div>
     </div>
     <div class="price-card">
       <p class="eyebrow" style="margin:0">Ops seat (optional)</p>
       <p class="amount">$999<span class="small muted"> / mo</span></p>
       <p class="small muted">Higher complaint volume. Mailto for now — magnet Stripe HOLD pattern.</p>
-      <div class="btn-row"><a class="btn btn-ghost" href="mailto:settleupcollections@polsia.app?subject=PortalReply%20Ops%20%24999">Ask Ops seat</a></div>
+      <div class="btn-row"><a class="btn btn-ghost" href="mailto:nathanplatter@gmail.com?subject=PortalReply%20Ops%20%24999">Ask Ops seat</a></div>
     </div>
   </div>
 </div></section>
@@ -159,12 +177,12 @@ Loading sample…</div>
     <li>Not legal advice or “CFPB-approved” claims</li>
     <li>Not LotBeacon / Marketplace / LLC theater</li>
   </ul>
-  <p><strong>Not legal advice.</strong> Educational demo with synthetic artifacts only.</p>
+  <p><strong>Not legal advice.</strong> Educational demo with synthetic artifacts only. Human owns Submit in the Company Portal.</p>
 </div></section>
 </main>
 <footer class="footer"><div class="wrap">
-  <p><strong>SU-SIB-2 PortalReply / INBOUND PACKET</strong> · SettleUp tag-along</p>
-  <p class="small muted" style="margin:.4rem 0 0">Not legal advice · no CFPB API · not a full complaints platform · human pastes into portal · synthetic demo only · <a href="mailto:settleupcollections@polsia.app">settleupcollections@polsia.app</a></p>
+  <p><strong>PortalReply / CFPB portal pack · SettleUp suite module</strong> · SettleUp tag-along</p>
+  <p class="small muted" style="margin:.4rem 0 0">Not legal advice · no CFPB API · not a full complaints platform · human pastes into portal · synthetic demo only · <a href="mailto:nathanplatter@gmail.com">nathanplatter@gmail.com</a></p>
 </div></footer>
 <div class="toast" id="toast" role="status">Pack copied (demo) — paste into portal after counsel HITL.</div>
 <script>
@@ -198,18 +216,36 @@ function syncHitl(mode){
   const box = document.getElementById('hitl-box');
   const cb = document.getElementById('hitl-approve');
   const btn = document.getElementById('btn-copy');
+  const banner = document.getElementById('refuse-banner');
   if(mode==='refuse'){
     box.classList.add('locked');
     cb.checked = false;
     cb.disabled = true;
     btn.disabled = true;
-    btn.textContent = 'Copy blocked — REFUSE';
+    btn.textContent = 'Copy locked — REFUSE';
+    btn.classList.add('btn-refuse-locked');
+    if(banner) banner.classList.add('show');
   } else {
     box.classList.remove('locked');
     cb.disabled = false;
+    btn.classList.remove('btn-refuse-locked');
     btn.disabled = !cb.checked;
     btn.textContent = 'Copy for portal';
+    if(banner) banner.classList.remove('show');
   }
+}
+function setRefuseChrome(on){
+  ['panel-complaint','panel-account','panel-clock','panel-output'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.classList.toggle('refuse-mode', on);
+  });
+  if(out) out.classList.toggle('refuse-mode', on);
+  var gaps = document.getElementById('gap-list');
+  if(gaps) gaps.classList.toggle('loud-gaps', on);
+  var cs = document.getElementById('complaint-sample');
+  var as = document.getElementById('account-sample');
+  if(cs) cs.classList.toggle('refuse-mode', on);
+  if(as) as.classList.toggle('refuse-mode', on);
 }
 const complaintHappy = `<span class="watermark">DEMO · SYNTHETIC COMPLAINT</span>
 <span class="meta-line">ID SYN-CFPB-2026-88421 · Debt collection · Not owed / itemization</span>
@@ -239,7 +275,11 @@ function renderGaps(mode){
   }
 }
 function setMode(mode){
-  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.mode===mode));
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    var on = b.dataset.mode===mode;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
   if(mode==='happy'){
     out.innerHTML = happy;
     var cs=document.getElementById('complaint-sample'); var as=document.getElementById('account-sample');
@@ -247,6 +287,7 @@ function setMode(mode){
     arts.innerHTML = '<li>Complaint PDF (synthetic)</li><li>Account timeline CSV</li><li>Prior validation notice</li><li>Payment ledger excerpt</li>';
     document.getElementById('clock').textContent = '11d 06h';
     document.getElementById('clock-note').textContent = 'Received: synthetic Sep 1 · Due: Sep 16 · On track';
+    setRefuseChrome(false);
   } else {
     out.innerHTML = refuse;
     var cs=document.getElementById('complaint-sample'); var as=document.getElementById('account-sample');
@@ -254,19 +295,24 @@ function setMode(mode){
     arts.innerHTML = '<li>Complaint PDF (synthetic)</li><li class="hl-gap">Ledger incomplete</li><li class="hl-gap">No ownership artifact</li><li class="hl-gap">Empty comms export</li>';
     document.getElementById('clock').textContent = '03d 02h';
     document.getElementById('clock-note').textContent = 'Clock still running — REFUSE blocks weak paste';
+    setRefuseChrome(true);
   }
   renderGaps(mode);
   syncHitl(mode);
 }
-document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
-document.getElementById('hitl-approve').addEventListener('change',()=>{
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.addEventListener('click', function(){ setMode(b.dataset.mode); });
+});
+document.getElementById('hitl-approve').addEventListener('change', function(){
   const mode = document.querySelector('.tabs button.active').dataset.mode;
   syncHitl(mode);
 });
-document.getElementById('btn-copy').addEventListener('click',()=>{
+document.getElementById('btn-copy').addEventListener('click', function(){
   const mode = document.querySelector('.tabs button.active').dataset.mode;
+  toast.classList.remove('toast-refuse');
   if(mode==='refuse'){
     toast.textContent = 'Blocked — resolve gaps before copy. Refuse-over-hallucinate.';
+    toast.classList.add('toast-refuse');
   } else if(!document.getElementById('hitl-approve').checked){
     toast.textContent = 'HITL approve required before copy.';
   } else {
@@ -274,7 +320,7 @@ document.getElementById('btn-copy').addEventListener('click',()=>{
     try{ navigator.clipboard.writeText(out.innerText); }catch(e){}
   }
   toast.classList.add('show');
-  setTimeout(()=>toast.classList.remove('show'), 2800);
+  setTimeout(function(){ toast.classList.remove('show'); }, 2800);
 });
 setMode('happy');
 </script>
