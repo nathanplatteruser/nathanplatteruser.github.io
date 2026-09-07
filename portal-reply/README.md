@@ -1,9 +1,38 @@
-# SU-SIB-2 PortalReply (SettleUp module)
+# SU-SIB-2 PortalReply / INBOUND PACKET
 
-CFPB Company Portal response pack — **SettleUp suite module** (add-to-cart / Pilot attach).
+Pages-ready static demo: CFPB Company Portal **response pack** for SettleUp buyers.
 
-- Not a full CMS · no CFPB API write-back · not legal advice
-- Soft ROI on pricing copy only
-- Pilot aisle: https://buy.stripe.com/dRm00j0GG53F8dVfO17Vm03
+Not a CMS. Human pastes into the Company Portal after HITL.
 
-Ticket: SU-SIB-2 · CoS sniff-test · Saas PM module framing
+## Files
+
+- `index.html` — interactive demo
+- `assets/ink.css` — paper/ink styles (+ PortalReply chrome)
+- `.nojekyll` — GitHub Pages ready
+
+## Open
+
+```bash
+cd /workspace/settleup-siblings/portal-reply
+python3 -m http.server 8765
+# http://127.0.0.1:8765/
+```
+
+Or open `index.html` in a browser.
+
+## Demo (one-liners)
+
+- **Happy path:** stay on **Happy path** → review cite-to-file pack → check **HITL approve** → **Copy for portal**.
+- **Refuse path:** tap **Missing facts → REFUSE** → gap checklist locks copy (refuse-over-hallucinate).
+
+## Pricing
+
+- Pilot **$499/mo**: https://buy.stripe.com/dRm00j0GG53F8dVfO17Vm03
+- Ops **$999/mo**: mailto settleupcollections@polsia.app
+- Soft ROI on page = labeled assumptions only
+
+## Rails
+
+Not legal advice · no CFPB API · not a full complaints platform · SettleUp tag-along.
+
+Do **not** git push from this folder — parent publishes.
