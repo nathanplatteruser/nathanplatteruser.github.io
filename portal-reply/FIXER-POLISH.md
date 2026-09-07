@@ -40,3 +40,9 @@
 
 ## Eng publish (github.io)
 Push / Pages deploy of `portal-reply` (`index.html`, `assets/ink.css`, `.nojekyll`) so live `https://nathanplatteruser.github.io/portal-reply/` picks up HTML+CSS. Do not invent Stripe/LLC.
+
+## Brand hierarchy nits (2026-09-07)
+- Mark: hide SU-SIB-2 → SettleUp module
+- SettleUp+PORTAL suite chip
+- Pilot $499 CTA primary; demo secondary
+- Pilot price-card--primary weight
