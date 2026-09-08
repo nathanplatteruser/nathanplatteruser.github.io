@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Marketplace Copilot · Path B preview</title>
+<meta name="description" content="Mock inbox and assisted import for couch-or-car sellers. Human Send. Not a live Facebook inbox. No personal Marketplace API."/>
+<style>
+  :root { --ink:#14202b; --paper:#f7f4ee; --line:#e4ddd2; --hot:#9a3412; --ok:#14532d; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.45 Georgia, serif; color:var(--ink); background:var(--paper); }
+  header, main, footer { max-width: 920px; margin: 0 auto; padding: 16px 16px 0; }
+  h1 { font-size: 1.55rem; margin: 8px 0 6px; }
+  .banner { background:#fff8e8; border:1px solid #e7d3a1; border-radius:10px; padding:10px 12px; font-size:15px; }
+  .row { display:grid; grid-template-columns: 1fr 1.2fr; gap:12px; margin-top:14px; }
+  @media (max-width: 720px) { .row { grid-template-columns: 1fr; } }
+  .panel { background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px; }
+  button.thread, button.act { font: inherit; text-align:left; width:100%; border:1px solid var(--line); background:#fff; border-radius:10px; padding:10px; margin:0 0 8px; cursor:pointer; }
+  button.thread.on { border-color:#14202b; }
+  .tag { font: 12px/1 ui-sans-serif, system-ui; letter-spacing:.04em; text-transform:uppercase; }
+  .hot { color: var(--hot); }
+  textarea { width:100%; min-height:88px; font:15px/1.4 ui-sans-serif, system-ui; padding:8px; border-radius:8px; border:1px solid var(--line); }
+  .note { font-size:14px; opacity:.85; }
+  a { color: inherit; }
+  footer { padding-bottom: 28px; font-size:13px; opacity:.8; }
+</style>
+</head>
+<body>
+<header>
+  <p class="tag">Marketplace Copilot · couch or car · Path B</p>
+  <h1>Mock inbox. You still hit Send.</h1>
+  <p class="banner"><b>Seeded preview.</b> Human Send. Not a live Facebook inbox. No personal Marketplace API. No Connect. Assisted import only (you paste a thread). Soft labor math is modeled from your hours, not a printed multiplier.</p>
+</header>
+<main>
+  <div class="row">
+    <section class="panel" aria-label="Mock inbox">
+      <p class="tag">Mock inbox</p>
+      <button class="thread on" type="button" data-id="hot">
+        <span class="tag hot">Hot · sofa</span><br/>
+        <b>Jordan</b> · Can I pick up tonight?<br/>
+        <span class="note">Listing $180 · local pickup</span>
+      </button>
+      <button class="thread" type="button" data-id="desk">
+        <span class="tag">Needs reply · desk</span><br/>
+        <b>Sam</b> · Would you take $35?<br/>
+        <span class="note">Listing $40 · price stays yours</span>
+      </button>
+      <button class="thread" type="button" data-id="bike">
+        <span class="tag">Waiting · bike</span><br/>
+        <b>Alex</b> · Thanks, I will check the link.<br/>
+        <span class="note">Listing $220 · you already replied</span>
+      </button>
+    </section>
+    <section class="panel" aria-label="Draft and send">
+      <p class="tag">Assisted draft · you confirm</p>
+      <p id="fact" class="note">Facts used: price $180, local pickup, tonight window. Nothing invented.</p>
+      <textarea id="draft" readonly>Tonight works between 6 and 8pm at the pickup spot in the listing. Cash preferred. See you then.</textarea>
+      <p>
+        <button class="act" id="send" type="button">Human Send (stays on this page)</button>
+      </p>
+      <p id="sent" class="note" hidden>Nothing left this page. In a real seat you would paste this into Messenger yourself.</p>
+      <p class="tag" style="margin-top:14px">Assisted import</p>
+      <p class="note">Paste a buyer message you already have. This does not attach Facebook.</p>
+      <textarea id="paste" placeholder="Paste one buyer message…"></textarea>
+      <button class="act" id="import" type="button">Add to mock inbox</button>
+    </section>
+  </div>
+  <p class="note" style="margin-top:14px">Request a pilot (no checkout, no account): <a href="mailto:nathanplatter@gmail.com?subject=Marketplace%20Copilot%20pilot%20request">nathanplatter@gmail.com</a></p>
+</main>
+<footer>
+  Path B permanent for this preview. Not affiliates. Not a free trial. Not SettleUp. Not LotBeacon.
+</footer>
+<script>
+const threads = {
+  hot: {
+    fact: "Facts used: price $180, local pickup, tonight window. Nothing invented.",
+    draft: "Tonight works between 6 and 8pm at the pickup spot in the listing. Cash preferred. See you then."
+  },
+  desk: {
+    fact: "Facts used: listed $40, local pickup. Draft refuses a silent discount.",
+    draft: "Price is firm at $40 for local pickup. Happy to hold it if you can come today."
+  },
+  bike: {
+    fact: "Facts used: listed $220. Waiting on them. No second send from this page.",
+    draft: "Sounds good. Grab a slot when you can and I will confirm."
+  }
+};
+const fact = document.getElementById("fact");
+const draft = document.getElementById("draft");
+const sent = document.getElementById("sent");
+document.querySelectorAll(".thread").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".thread").forEach((b) => b.classList.remove("on"));
+    btn.classList.add("on");
+    const t = threads[btn.dataset.id];
+    fact.textContent = t.fact;
+    draft.value = t.draft;
+    sent.hidden = true;
+  });
+});
+document.getElementById("send").addEventListener("click", () => {
+  sent.hidden = false;
+});
+document.getElementById("import").addEventListener("click", () => {
+  const text = document.getElementById("paste").value.trim();
+  if (!text) return;
+  fact.textContent = "Imported from your paste. Not from Facebook. You still hit Send.";
+  draft.value = "Thanks for the note. Still available for local pickup at the listed price. Want a time window?";
+  sent.hidden = true;
+});
+</script>
+</body>
+</html>
