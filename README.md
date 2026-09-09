@@ -2,6 +2,8 @@
 
 **Root** = Nathan public portfolio hub (NP-HUB-1).
 
+**LotBeacon live desk (bookmark forever):** https://nathanplatteruser.github.io/lotbeacon/
+
 Product demos remain at their paths:
 - `/portal-reply/` `/license-desk/` `/counsel-qa/`
 - `/collect-qa-magnet/` (external repo Pages) etc.

@@ -1,4 +1,15 @@
+# This folder is not the live LotBeacon
+
+**Bookmark forever:** [https://nathanplatteruser.github.io/lotbeacon/](https://nathanplatteruser.github.io/lotbeacon/)
+
+That URL is served from the `nathanplatteruser/lotbeacon` repo (`docs/` on GitHub Pages). This directory inside `nathanplatteruser.github.io` is a leftover preview. Do not share files from here as the product.
+
+`grok-demo.html` in this folder is also leftover. The live desk (Queue, Admin, Owner dashboard, language, thread length) lives at the simple URL above.
+
+---
+
 # LotBeacon — Dealership Messenger Copilot Preview
+
 
 A no-build, static workflow preview for dealership BDC representatives handling high-volume Facebook Messenger and DM-style leads.
 
