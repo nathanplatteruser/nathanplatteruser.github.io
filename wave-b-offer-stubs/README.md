@@ -43,7 +43,7 @@ wave-b-stubs/
 
 ## Rails
 
-- Mailto → `settleupcollections@polsia.app` (subject codes). No live Stripe on magnets.
+- Mailto → `nathanplatter@gmail.com` (subject codes). No live Stripe on magnets.
 - Paper/ink. Phone-friendly. Not neon SaaS.
 - COMMON frozen. No Wave C. No LLC/entity admin.
 - Every page: not legal advice · kill line · non-goals / not-SoR-replacement.
