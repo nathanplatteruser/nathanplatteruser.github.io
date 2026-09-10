@@ -28,22 +28,22 @@ wave-b-stubs/
 
 | # | Code | Path | Offer | Meets depth? |
 |---|------|------|-------|--------------|
-| 1 | BIND | `bind/` | Seat or toothpick after intro | **YES** (priority / richest sample) |
-| 2 | PREMISES | `premises/` | Quote after intro | **YES** |
-| 3 | 8867 | `form-8867/` | Human recon after intro | **YES** |
-| 4 | RIDGE | `ridge/` | Quote after intro | **YES** |
-| 5 | RECORD | `record/` | Trial after intro | **YES** |
-| 6 | KENNEL | `kennel/` | Quote after intro | **YES** |
-| 7 | WAKE | `wake/` | Quote after intro | **YES** |
+| 1 | BIND | `bind/` | Book intro | **YES** (priority / richest sample) |
+| 2 | PREMISES | `premises/` | Book intro | **YES** |
+| 3 | 8867 | `form-8867/` | Book intro | **YES** |
+| 4 | RIDGE | `ridge/` | Book intro | **YES** |
+| 5 | RECORD | `record/` | Book intro | **YES** |
+| 6 | KENNEL | `kennel/` | Book intro | **YES** |
+| 7 | WAKE | `wake/` | Book intro | **YES** |
 | 8 | BOND | `bond/` | Module/OEM sketch | Partial (one-pager only per clock) |
-| 9 | SILL | `sill/` | Quote after intro | Partial (offer-only landing per clock) |
-| 10 | SERVICE | `service/` | Monthly niche after intro + link | **YES** (link-out to live magnet sample) |
+| 9 | SILL | `sill/` | Book intro | Partial (offer-only landing per clock) |
+| 10 | SERVICE | `service/` | Book intro + link | **YES** (link-out to live magnet sample) |
 
 **Score: 8/10 full depth** (fail bar ≥6). BOND + SILL intentionally thinner per Wave B clock wording.
 
 ## Rails
 
-- Talk first → https://calendly.com/nathanplatter or `nathanplatter@gmail.com`. No checkout on magnets.
+- Talk first → https://calendly.com/nathanplatter (Book intro). No checkout on magnets.
 - Paper/ink. Phone-friendly. Not neon SaaS.
 - COMMON frozen. No Wave C. No LLC/entity admin.
 - Every page: not legal advice · kill line · non-goals / not-SoR-replacement.

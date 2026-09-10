@@ -5,5 +5,5 @@ Not PI EvenUp. Not SettleUp dispute-letter gate (agency inbound).
 
 Demo Playbook bar: Compare · breakable demo · talk first · Status Board on publish.
 
-Intro first: https://calendly.com/nathanplatter or mailto:nathanplatter@gmail.com
+Book intro: https://calendly.com/nathanplatter
 No public list. No checkout on this page.

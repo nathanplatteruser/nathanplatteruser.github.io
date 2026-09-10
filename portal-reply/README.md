@@ -27,8 +27,7 @@ Or open `index.html` in a browser.
 
 ## Talk first
 
-- Book 20 minutes: https://calendly.com/nathanplatter
-- Email: nathanplatter@gmail.com
+- Book intro: https://calendly.com/nathanplatter
 - No public list. No checkout on this page.
 
 ## Rails
