@@ -3,7 +3,7 @@
 Attorney demand / MVN cited gap report — counsel outbound QA.
 Not PI EvenUp. Not SettleUp dispute-letter gate (agency inbound).
 
-Demo Playbook bar: Compare · breakable demo · soft ROI · Pilot add-to-cart · Status Board on publish.
+Demo Playbook bar: Compare · breakable demo · talk first · Status Board on publish.
 
-Pilot: https://buy.stripe.com/dRm00j0GG53F8dVfO17Vm03
-Sibling Stripe HOLD.
+Intro first: https://calendly.com/nathanplatter or mailto:nathanplatter@gmail.com
+No public list. No checkout on this page.
