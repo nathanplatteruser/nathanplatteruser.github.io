@@ -918,7 +918,7 @@
       usage: { customer_messages: messageList().filter(function (m) { return m.direction === "in"; }).length, replies_sent: messageList().filter(function (m) { return m.direction === "out"; }).length, drafts_accepted_as_is: 0, drafts_edited: 0, typed_manually: 0 },
       speed: { first_response: "2m", median_response: "2m" },
       safety: { claims_routed_for_verification: state.path === "guided" ? 1 : 0, blocked_sends: 0, handed_to_a_person: 1, rep_corrections: 0 },
-      return: { rep_minutes_saved: 5, rep_cost_saved: 3, expected_gross: 0, prevented_claim_value: 0 },
+      return: { rep_minutes_saved: 5 },
       assumptions: {},
       explain: ["Numbers on this card are from the synthetic path, not a live store."],
     };

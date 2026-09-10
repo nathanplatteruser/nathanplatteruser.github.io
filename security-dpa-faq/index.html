@@ -31,7 +31,7 @@ a{color:#0b57d0}
 <table>
 <tr><th>Topic</th><th>Status</th><th>Honest answer</th></tr>
 <tr><td>Dispute-letter drafts, refuse reasons, role actions in the product console</td><td>**ASSUMPTION** (Pilot shape)</td><td>Pilot is built around gate + roles + HITL. Expect account metadata, drafts, ledger facts *you* supply for a review, and refuse/pass outcomes. Exact schema and retention days are confirmed in onboarding, not invented here.</td></tr>
-<tr><td>Payment / billing identity</td><td>**VERIFIED**</td><td>Pilot checkout runs on **Stripe** (live Pilot link). Card data is handled by Stripe, not by us inventing a card vault.</td></tr>
+<tr><td>Payment / billing identity</td><td>**VERIFIED**</td><td>When a Pilot is opened after intro, billing can run on **Stripe**. Card data is handled by Stripe, not by us inventing a card vault. This page is not a checkout.</td></tr>
 <tr><td>Public demos</td><td>**VERIFIED**</td><td>Demo / sibling landings often host on **GitHub Pages**. Demo paths use **synthetic / fixture** data labeled as such.</td></tr>
 <tr><td>Production AMS / dialer / payment write-back</td><td>**VERIFIED non-goal (current)**</td><td>We are not your CMS, dialer, or payments rail. Production ledger sync = Firm+ / post-MVP honesty - we will not pretend Pilot already syncs your live book.</td></tr>
 <tr><td>Consumer PII beyond what you paste/upload for a gated letter</td><td>**ASSUMPTION**</td><td>Minimize what you put in Pilot until DPA + retention are signed. Do not dump full portfolios &quot;just to try it.&quot;</td></tr>
@@ -72,7 +72,7 @@ a{color:#0b57d0}
 
 <table>
 <tr><th>Vendor / surface</th><th>Use</th><th>Status</th></tr>
-<tr><td>**Stripe**</td><td>Pilot $499 live checkout / billing</td><td>**VERIFIED**</td></tr>
+<tr><td>**Stripe**</td><td>Billing when a Pilot is opened after intro (not a public checkout)</td><td>**VERIFIED** as billing partner</td></tr>
 <tr><td>**GitHub Pages** (and related GitHub static hosting)</td><td>Public demos / sibling landings</td><td>**VERIFIED** for demo hosting pattern</td></tr>
 <tr><td>Application backend, email, file storage, auth IdP, logging, AI model host</td><td>Production Pilot runtime</td><td>**UNKNOWN / confirm at DPA** - we will not invent vendor names here</td></tr>
 </table>
@@ -84,7 +84,7 @@ a{color:#0b57d0}
 <h2>5. DPA path (how to request; template status)</h2>
 
 <p>1. Email <strong>nathanplatter@gmail.com</strong> with subject <strong>SettleUp DPA request</strong>.</p>
-<p>2. Include: legal entity name, primary contact, whether Pilot is Stripe-paid or pending, and any must-have clauses (deletion, subprocessors, breach notice window).</p>
+<p>2. Include: legal entity name, primary contact, whether a Pilot is pending after intro, and any must-have clauses (deletion, subprocessors, breach notice window).</p>
 <p>3. <strong>Template status (honest):</strong> <strong>ASSUMPTION / gap labeled</strong> - a polished mutual DPA pack is <strong>not</strong> claimed as &quot;SOC2-ready downloadable PDF on the marketing site.&quot; We work the DPA as a <strong>growth-partner Pilot artifact</strong>, not a stall weapon. Expect a working draft path on request; do not assume a pre-signed enterprise MSA library exists.</p>
 
 <p>We would rather send a thin honest DPA than a thick fake one.</p>
@@ -111,16 +111,16 @@ a{color:#0b57d0}
 <table>
 <tr><th>Data</th><th>Synthetic / fixtures, labeled</th><th>Your chosen letter packs / facts you provide</th><th>Ledger sync &amp; deeper write paths</th></tr>
 <tr><td>Goal</td><td>Breakable refuse proof</td><td>Gate + roles + HITL on real work you select</td><td>Post-MVP / Firm+ honesty when built</td></tr>
-<tr><td>Status</td><td>**VERIFIED** demo pattern</td><td>**VERIFIED** live checkout; workspace details in onboarding</td><td>**ASSUMPTION / roadmap** - not sold as already done</td></tr>
+<tr><td>Status</td><td>**VERIFIED** demo pattern</td><td>**VERIFIED** intro-then-Pilot path; workspace details in onboarding</td><td>**ASSUMPTION / roadmap** - not sold as already done</td></tr>
 </table>
 
-<p><strong>Hard honesty:</strong> Fixtures prove the gate. They do not prove your AMS. Pilot is the paid path to run *your* letters under human Send without pretending full production ingestion exists today.</p>
+<p><strong>Hard honesty:</strong> Fixtures prove the gate. They do not prove your AMS. A Pilot, quoted after intro, is the path to run *your* letters under human Send without pretending full production ingestion exists today.</p>
 
 <hr/>
 
 <h2>8. How to unblock vendor review without peacock (buyer checklist)</h2>
 
-<p>Copy/paste for IT / procurement. Check what you actually need for a <strong>$499 Pilot</strong>, not a Fortune-50 RFP.</p>
+<p>Copy/paste for IT / procurement. Check what you actually need for a <strong>Pilot after intro</strong>, not a Fortune-50 RFP.</p>
 
 <p>- [ ] Confirm product job: <strong>dispute-letter refuse gate + roles</strong>, not AMS/dialer/payments replacement.</p>
 <p>- [ ] Confirm control: <strong>human owns Send</strong>; refuse-over-hallucinate; <strong>not legal advice</strong>; <strong>not CFPB-approved</strong>.</p>
@@ -144,6 +144,6 @@ a{color:#0b57d0}
 <hr/>
 
 <p>*SettleUp Collections · Security &amp; DPA FAQ · for CoS / vendor review · overwrite-safe one-pager*</p>
-<p class="muted">Soft ROI · Mailto HOLD · no peacock SOC2 · cutover LOCK (hosted /app is 404).</p>
+<p class="muted">Talk first · no public list · no peacock SOC2 · cutover LOCK (hosted /app is 404).</p>
 </body>
 </html>

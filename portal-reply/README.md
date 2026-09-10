@@ -25,11 +25,10 @@ Or open `index.html` in a browser.
 - **Happy path:** stay on **Happy path** → review cite-to-file pack → check **HITL approve** → **Copy for portal**.
 - **Refuse path:** tap **Missing facts → REFUSE** → gap checklist locks copy (refuse-over-hallucinate).
 
-## Pricing
+## Talk first
 
-- Pilot **$499/mo**: https://buy.stripe.com/dRm00j0GG53F8dVfO17Vm03
-- Ops **$999/mo**: mailto nathanplatter@gmail.com
-- Soft ROI on page = labeled assumptions only
+- Book intro: https://calendly.com/nathanplatter
+- No public list. No checkout on this page.
 
 ## Rails
 
