@@ -678,3 +678,28 @@ h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
   border-color: var(--np-steel);
   color: var(--np-paper);
 }
+
+.featured-grid {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .featured-grid { grid-template-columns: 1fr 1fr; }
+}
+.work-card.featured {
+  border-color: var(--ink);
+  border-width: 2px;
+  padding: 1.25rem 1.2rem;
+}
+.work-card.featured h3 { font-size: 1.35rem; }
+.outcomes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+}
+.outcomes-list li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+
