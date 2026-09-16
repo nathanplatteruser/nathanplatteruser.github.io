@@ -691,6 +691,37 @@ h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
   padding: 1.25rem 1.2rem;
 }
 .work-card.featured h3 { font-size: 1.35rem; }
+.work-card .refuse-banner { margin: 0; }
+.work-card .refuse-banner .rb-title { font-size: 1.05rem; }
+.work-card .pillar-gist {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin: 0.1rem 0;
+}
+.work-card .pillar-gist caption {
+  caption-side: top;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 0 0 0.35rem;
+}
+.work-card .pillar-gist th,
+.work-card .pillar-gist td {
+  border-top: 1px solid var(--line);
+  padding: 0.42rem 0.5rem 0.42rem 0;
+  text-align: left;
+  vertical-align: top;
+}
+.work-card .pillar-gist th {
+  font-weight: 600;
+  color: var(--ink);
+  width: 38%;
+}
+.work-card .pillar-gist td { color: var(--ink-2); }
 .outcomes-list {
   list-style: none;
   padding: 0;
