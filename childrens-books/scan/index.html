@@ -141,14 +141,14 @@
       </div>
       <div class="isbn-list" id="grade-list"></div>
       <div class="row" style="margin-top:1rem;">
-        <button type="button" class="solid" id="btn-hydrate">Write the listings</button>
+        <button type="button" class="solid" id="btn-hydrate">Write descriptions and sheets</button>
         <button type="button" class="ghost" id="btn-back-scan">Scan more</button>
       </div>
     </section>
 
     <section id="phase-hydrate" class="hidden">
       <p class="whisper">Hydrate</p>
-      <h1>Looking up each ISBN.</h1>
+      <h1>Looking up each ISBN, then writing buyer copy.</h1>
       <p class="lede" id="hydrate-step">Starting…</p>
       <div class="bar-track"><div class="bar-fill" id="hydrate-bar"></div></div>
     </section>
@@ -156,7 +156,7 @@
     <section id="phase-files" class="hidden">
       <p class="whisper">Sheets are ready</p>
       <h1>Download, then upload. Listed is not sold.</h1>
-      <p class="lede">The eBay sheet is File Exchange / Seller Hub Reports. The Amazon sheet is an Inventory Loader. A grown-up still has to upload. The shop does not publish by itself.</p>
+      <p class="lede">eBay gets the full listing — what the book is, plus this copy. Amazon already has the catalog blurb; we send this copy’s condition as the item note. A grown-up still has to upload. The shop does not publish by itself.</p>
       <div class="stack" style="margin:1.15rem 0;">
         <button type="button" class="solid file-btn" id="btn-ebay">Download eBay sheet</button>
         <button type="button" class="solid file-btn" id="btn-ebay-go" style="background:var(--stamp);">Click to eBay Upload</button>
@@ -564,6 +564,7 @@
             else if (book.pages && book.pages > 500) book.format = "hardcover";
             if (sale && sale.listPrice && sale.listPrice.amount) book.retail = Number(sale.listPrice.amount);
             else if (sale && sale.retailPrice && sale.retailPrice.amount) book.retail = Number(sale.retailPrice.amount);
+            book.desc = stripHtml(v.description || "");
           }
         }
       } catch (e) { /* google optional */ }
@@ -584,6 +585,49 @@
       return book;
     }
 
+    function stripHtml(raw) {
+      return String(raw || "")
+        .replace(/<br\s*\/?>/gi, "\n")
+        .replace(/<\/p>/gi, "\n\n")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&nbsp;/gi, " ")
+        .replace(/&/gi, "&")
+        .replace(/"/gi, "\"")
+        .replace(/&#39;/g, "'")
+        .replace(/\s+\n/g, "\n")
+        .replace(/\n{3,}/g, "\n\n")
+        .replace(/[ \t]{2,}/g, " ")
+        .trim();
+    }
+    function gradeCopy(grade) {
+      if (grade === "LN") return "Like New. Looks unread. Tight binding, clean pages. No highlighting, underlining, or writing noted.";
+      if (grade === "VG") return "Very Good. Light shelf wear. Complete and clean. No highlighting, underlining, or writing noted.";
+      if (grade === "G") return "Good. Obvious reading wear. Complete and readable. All pages present.";
+      if (grade === "A") return "Acceptable. Worn but complete. All pages present. Packed as a reading copy.";
+      return "Used copy. Complete. Packed as described.";
+    }
+    function amazonNote(book, grade) {
+      return [gradeCopy(grade), "This is the copy that ships.", "Packed from Lincoln, Nebraska via USPS Media Mail."].join(" ").slice(0, 1000);
+    }
+    function ebayListing(book, grade) {
+      const blurb = stripHtml(book.desc || "").slice(0, 1200);
+      const fmt = book.format === "hardcover" ? "Hardcover" : book.format === "textbook" ? "Textbook" : book.format === "mass-market" ? "Mass Market Paperback" : "Paperback";
+      const meta = [fmt, book.publisher, book.year, book.pages ? book.pages + " pages" : ""].filter(Boolean).join(" · ");
+      const about = blurb || "Used copy of the edition on the barcode. Match the ISBN if this is for a classroom list.";
+      return [
+        book.title,
+        book.author ? "by " + book.author : "",
+        meta,
+        "ISBN " + book.isbn13,
+        "",
+        about,
+        "",
+        "This copy",
+        gradeCopy(grade),
+        "",
+        "Ships from Lincoln, Nebraska via USPS Media Mail. Packed to survive the trip. Combined shipping when the cart allows."
+      ].filter((l, i, arr) => !(l === "" && arr[i - 1] === "")).join("\n");
+    }
     function tagPrice(book, grade, keep) {
       const mult = GRADE_MULT[grade] || 0.48;
       let market;
@@ -603,13 +647,13 @@
       const out = [];
       for (let i = 0; i < state.drafts.length; i++) {
         const d = state.drafts[i];
-        $("hydrate-step").textContent = "Book " + (i + 1) + " of " + state.drafts.length + " — " + d.isbn;
-        $("hydrate-bar").style.width = Math.round((i / state.drafts.length) * 100) + "%";
+        $("hydrate-step").textContent = "Looking up " + (i + 1) + " of " + state.drafts.length;
+        $("hydrate-bar").style.width = Math.round((i / (state.drafts.length + 1)) * 100) + "%";
         const book = await lookup(d.isbn);
         const price = tagPrice(book, d.grade, keep);
-        const cond = "Condition: " + GRADE_WORD[d.grade] + ". No highlighting, underlining, or writing noted. Photos and notes describe the actual copy that ships.";
-        const title = clipTitle([book.title, book.author, book.format === "hardcover" ? "Hardcover" : "Paperback", book.year, d.grade].filter(Boolean).join(" "), 80);
-        const desc = [book.title, book.author && ("by " + book.author), book.publisher, book.year, "ISBN " + book.isbn13, cond, "Ships from Lincoln, Nebraska via USPS Media Mail."].filter(Boolean).join(". ");
+        const cond = amazonNote(book, d.grade);
+        const title = clipTitle([book.title, book.author, book.format === "hardcover" ? "Hardcover" : "Paperback", book.year].filter(Boolean).join(" "), 80);
+        $("hydrate-step").textContent = "Writing buyer copy for " + (book.title || d.isbn);
         out.push({
           sku: sku(i),
           isbn13: book.isbn13,
@@ -622,7 +666,7 @@
           grade: d.grade,
           listPrice: price,
           ebayTitle: title,
-          ebayDescription: desc,
+          ebayDescription: ebayListing(book, d.grade),
           conditionDescription: cond,
         });
       }
@@ -635,7 +679,12 @@
       state.phase = "files";
       show("phase-files");
       $("file-list").innerHTML = state.copies.map((c) => (
-        '<div class="isbn-row"><span>' + c.title + '<br><span class="muted">' + c.isbn13 + " · " + GRADE_WORD[c.grade] + '</span></span>' +
+        '<div class="isbn-row" style="align-items:flex-start"><span>' + c.title +
+        '<br><span class="muted">' + c.isbn13 + " · " + GRADE_WORD[c.grade] + '</span>' +
+        '<br><span class="muted" style="display:block;margin-top:0.35rem;">' +
+        String(c.ebayDescription || "").slice(0, 220).replace(/</g, "") +
+        (c.ebayDescription && c.ebayDescription.length > 220 ? "…" : "") +
+        "</span></span>" +
         '<span class="price">' + money(c.listPrice) + "</span></div>"
       )).join("");
     }
@@ -658,13 +707,13 @@
       const headers = ["sku","product-id","product-id-type","price","item-condition","quantity","add-delete","item-note","fulfillment-center-id","will-ship-internationally","expedited-shipping"];
       const rows = state.copies.map((c) => [
         c.sku, c.isbn13, "2", String(c.listPrice), AMAZON_COND[c.grade] || "3", "1", "a",
-        c.conditionDescription.slice(0, 200), "DEFAULT", "6", "n",
+        c.conditionDescription.slice(0, 1000), "DEFAULT", "6", "n",
       ].map(tsvEsc).join("\t"));
       return [headers.join("\t"), ...rows].join("\n");
     }
     function ledgerCsv() {
-      const headers = ["sku","isbn13","title","author","publisher","published_year","format","condition","list_price"];
-      const rows = state.copies.map((c) => [c.sku, c.isbn13, c.title, c.author, c.publisher, c.year, c.format, GRADE_WORD[c.grade], String(c.listPrice)].map(csvEsc).join(","));
+      const headers = ["sku","isbn13","title","author","publisher","published_year","format","condition","list_price","ebay_title","ebay_description","amazon_item_note"];
+      const rows = state.copies.map((c) => [c.sku, c.isbn13, c.title, c.author, c.publisher, c.year, c.format, GRADE_WORD[c.grade], String(c.listPrice), c.ebayTitle, c.ebayDescription, c.conditionDescription].map(csvEsc).join(","));
       return "\uFEFF" + [headers.join(","), ...rows].join("\n");
     }
     $("btn-ebay").onclick = () => download("shelfmark-ebay-" + todayStamp() + ".csv", ebayCsv());
