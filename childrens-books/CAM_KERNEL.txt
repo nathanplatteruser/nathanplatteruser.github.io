@@ -1,0 +1,4 @@
+cam-kernel 2026-09-19c
+MultiFormatReader + tap-to-start + aim crop + pagehide + wakeLock
+Hunt: /childrens-books/hunt/
+Scan: /childrens-books/scan/
