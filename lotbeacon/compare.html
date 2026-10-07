@@ -1,19 +1,118 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LotBeacon — vs the field</title>
-<meta name="description" content="What LotBeacon leaves out, and the policy reason. Not a smear sheet." />
-<style>:root{--ink:#09090b;--paper:#f4f1ea;--muted:#9a958c;--card:#121214;--line:#27272a;--fg:#f4f1ea}*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:46rem;margin:0 auto;padding:36px 18px 64px}.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(28px,6vw,40px);line-height:1.1;margin:10px 0}h2{font-size:18px;margin:0 0 6px}p,li{color:var(--muted)}b{color:var(--fg)}a{color:var(--paper)}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}.src{font-size:13px}</style></head>
+<meta name="description" content="LotBeacon versus Podium, Impel, Kenect, Gubagoo, STELLA, and HubSpot. Vendor claims only, each linked." />
+<style>
+:root{--ink:#09090b;--paper:#f4f1ea;--muted:#9a958c;--card:#121214;--line:#27272a;--fg:#f4f1ea}
+*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--fg);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 16px 72px}
+.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(28px,5vw,40px);line-height:1.1;margin:8px 0}
+p{color:var(--muted);max-width:46em}a{color:var(--paper)}
+.scroller{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:18px 0}
+table{border-collapse:collapse;min-width:980px;width:100%}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top;font-size:13px}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:#101012;position:sticky;top:0}
+td.feat{color:var(--paper);font-weight:650;min-width:140px}
+td.us{background:#16140f}
+.y{color:#c8ccd4}.n{color:#c4a48a}.u{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.note{font-size:13px;color:var(--muted)}
+</style></head>
 <body><main class="wrap">
-<p class="kicker">Vs the field</p>
-<h1>We leave features out on purpose.</h1>
-<p>Other desks will auto-reply, auto-book, or quote a number the store did not approve. That is not a missing feature here. It is the product. Sources are the policies, not a competitor scoreboard.</p>
-
-<div class="card"><h2>No autonomous send</h2><p>A person still hits Send. Meta’s Messenger policy gives a standard window (usually 24 hours) and a Human Agent tag for a person responding manually. Where the law requires it, an automated chat must say it is automated. We do not ship a bot that talks as the store.</p><p class="src">Source: <a href="https://developers.facebook.com/docs/messenger-platform/policy/">Messenger Platform policy</a> — standard messaging window and Human Agent tag; automated-experience disclosure.</p></div>
-
-<div class="card"><h2>No invented discount, payment, or hold</h2><p>Drafts may only quote live inventory. A price ask escalates. The FTC treats deceptive advertising as illegal. The CFPB watches auto advertising and financing claims. A tool that types “$2,500 off today” without a person is the liability.</p><p class="src">Sources: <a href="https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business">FTC Advertising FAQs</a> · <a href="https://www.consumerfinance.gov/compliance/compliance-resources/other-applicable-requirements/auto-loans/">CFPB auto loans</a></p></div>
-
-<div class="card"><h2>No off-platform scrape, no personal cell</h2><p>Paste-in or the Page inbox. Store number only. Unwanted texts are an FCC problem, not a growth channel.</p><p class="src">Source: <a href="https://www.fcc.gov/consumers/guides/stop-unwanted-robocalls-and-texts">FCC — stop unwanted robocalls and texts</a></p></div>
-
-<div class="card"><h2>Not Beakon. Not a BDC replacement.</h2><p>Beakon is lot GPS. LotBeacon is a Messenger sales copilot. We do not sell headcount replacement. Meta Inbox is free. The paid layer is intent, the queue, the firewall, and the escalate.</p></div>
-
+<p class="kicker">Vs the field · checked 7 Oct 2026</p>
+<h1>What they say they do. What we refuse.</h1>
+<p>Each yes or no is their page, not a review. A dash means their page does not say. Prices are ours unless their page lists one. Not a smear sheet. Not Beakon (lot GPS).</p>
+<div class="scroller"><table>
+<thead><tr>
+<th>Feature</th><th>LotBeacon</th><th>Why we don’t</th>
+<th>Podium (Jerry)</th><th>Impel</th><th>Kenect</th><th>Gubagoo</th><th>STELLA</th><th>HubSpot</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="feat">A person still hits Send</td>
+<td class="us">Yes. Draft waits. You send.</td>
+<td class="y"><a href="https://developers.facebook.com/docs/messenger-platform/policy/">Meta Messenger policy</a>: Human Agent tag is a person responding.</td>
+<td class="n">No. <a href="https://www.podium.com/product/ai-employee/auto">Jerry books the visit</a>.</td>
+<td class="n">No. <a href="https://impel.ai/gm">Books into the CRM</a>.</td>
+<td class="u">—</td>
+<td class="u">Mixed. <a href="https://www.gubagoo.com/chat">AI + live specialists</a>.</td>
+<td class="n">No. <a href="https://stellaautomotive.com/stella-service/">Books autonomously</a>.</td>
+<td class="n">No. <a href="https://www.hubspot.com/products/crm/chatbot-builder">Chatbot books the meeting</a>.</td>
+</tr>
+<tr>
+<td class="feat">Auto-reply, no person</td>
+<td class="us">No. Draft only.</td>
+<td class="y"><a href="https://developers.facebook.com/docs/messenger-platform/policy/">Same policy</a>: automated chat must say so where the law requires it.</td>
+<td class="y">Yes. <a href="https://www.podium.com/product/inbox-new-template/auto">Automatic AI replies</a>.</td>
+<td class="y">Yes. <a href="https://impel.ai/gm">Answers every lead in seconds</a>.</td>
+<td class="y">Yes. <a href="https://www.kenect.com/">24/7 text and voice AI</a>.</td>
+<td class="y">Yes. <a href="https://www.gubagoo.com/chat">AI-powered chat</a>.</td>
+<td class="y">Yes. <a href="https://stellaautomotive.com/">First ring, 24/7</a>.</td>
+<td class="y">Yes. <a href="https://www.hubspot.com/products/crm/chatbot-builder">Chatbot sequences</a>.</td>
+</tr>
+<tr>
+<td class="feat">Books the appointment itself</td>
+<td class="us">No. Two slots. You confirm.</td>
+<td class="y"><a href="https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business">FTC advertising guide</a>: a booked promise has to be true.</td>
+<td class="y">Yes. <a href="https://www.podium.com/product/ai-employee/auto">Schedules test drives</a>.</td>
+<td class="y">Yes. <a href="https://impel.ai/gm">Books into the CRM</a>.</td>
+<td class="y">Yes. <a href="https://www.kenect.com/">Automate scheduling</a>.</td>
+<td class="y">Yes. <a href="https://www.gubagoo.com/chat">Service questions into appointments</a>.</td>
+<td class="y">Yes. <a href="https://stellaautomotive.com/">Book sales demos into CRM</a>.</td>
+<td class="y">Yes. <a href="https://www.hubspot.com/products/sales/schedule-meeting">Meeting links</a>.</td>
+</tr>
+<tr>
+<td class="feat">24/7 coverage</td>
+<td class="us">No. A person is on the desk.</td>
+<td class="u">— We do not sell an overnight bot.</td>
+<td class="y">Yes. <a href="https://www.podium.com/product/inbox-new-template/auto">After-hours responder</a>.</td>
+<td class="y">Yes. <a href="https://impel.ai/gm">44% of AI-set appointments after hours</a> (their figure).</td>
+<td class="y">Yes. <a href="https://www.kenect.com/">24/7/365</a>.</td>
+<td class="u">—</td>
+<td class="y">Yes. <a href="https://stellaautomotive.com/">24/7/365 answering</a>.</td>
+<td class="u">— Not a desk shift.</td>
+</tr>
+<tr>
+<td class="feat">Facebook Messenger is the desk</td>
+<td class="us">Yes. Paste-in or the Page inbox.</td>
+<td class="u">—</td>
+<td class="u">— Texts, calls, web. Not claimed as Messenger.</td>
+<td class="u">— Email and SMS claimed.</td>
+<td class="u">— Text, email, voice.</td>
+<td class="u">— Chat and text.</td>
+<td class="u">— Voice, SMS, email.</td>
+<td class="u">— CRM chatbot. Not a Page inbox.</td>
+</tr>
+<tr>
+<td class="feat">No invented price or hold</td>
+<td class="us">Yes. Price ask escalates.</td>
+<td class="y"><a href="https://www.consumerfinance.gov/compliance/compliance-resources/other-applicable-requirements/auto-loans/">CFPB auto advertising</a>.</td>
+<td class="u">—</td><td class="u">—</td><td class="u">—</td><td class="u">—</td><td class="u">—</td><td class="u">—</td>
+</tr>
+<tr>
+<td class="feat">Public list price</td>
+<td class="us"><a href="pricing.html">$349 · $599 · $999</a></td>
+<td class="u">—</td>
+<td class="u">— Quote.</td>
+<td class="u">— Quote.</td>
+<td class="u">— Quote.</td>
+<td class="u">— Quote.</td>
+<td class="u">— Quote.</td>
+<td class="y"><a href="https://www.hubspot.com/products/crm/chatbot-builder">Free chatbot</a>. Not a store license.</td>
+</tr>
+<tr>
+<td class="feat">Sells as replacing the desk</td>
+<td class="us">No. We do not sell “fire the desk.”</td>
+<td class="u">—</td>
+<td class="y">Yes. <a href="https://www.podium.com/product/ai-employee/auto">Jerry does the work of 3 employees</a> (their line).</td>
+<td class="y">Yes. <a href="https://impel.ai/news/impel-partners-with-xtime/">Without additional headcount</a>.</td>
+<td class="y">Yes. <a href="https://www.kenect.com/">Free up your staff</a>.</td>
+<td class="u">—</td>
+<td class="y">Yes. <a href="https://stellaautomotive.com/">Without adding headcount</a> (dealer quote on their site).</td>
+<td class="u">— Not a BDC product.</td>
+</tr>
+</tbody></table></div>
+<p class="note">HubSpot is the CRM named in dealer conversations. It books meetings. It is not a dealership BDC. Beakon is lot GPS and is not on this table. Figures are the vendor’s, not audited.</p>
+<div class="card"><b>Why the blanks are blanks.</b> If the page does not say they quote a payment, invent a discount, or sit in Facebook Messenger, the cell is a dash. A dash is not a no.</div>
 <p><a href="CLICK-HERE.html">Back</a> · <a href="pricing.html">Pricing</a> · <a href="honesty.html">Honesty</a></p>
 </main></body></html>
