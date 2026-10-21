@@ -45,14 +45,16 @@ ok(q1.draft.text.includes("Saturday, September 12"), "quick confirm has date");
 ok(q1.draft.text.includes("10:00 AM"), "quick confirm has time");
 ok(q1.draft.text.includes("Tahoe"), "quick confirm has vehicle");
 ok(q1.draft.text.includes("Alex Reyes"), "quick confirm has rep");
-ok(q1.draft.text.includes("4115 N. 6th Street, Beatrice, NE 68310"), "quick confirm has Zoellner address");
+ok(q1.draft.text.includes("Pilot store"), "quick confirm names the pilot store");
+ok(q1.draft.text.includes("Lincoln, NE area"), "quick confirm has the pilot store area");
 ok(/Parking \(sample, edit\)/.test(q1.draft.text), "quick confirm has labeled parking sample");
 ok(/Nothing sends to Facebook/.test(q1.draft.text), "quick confirm says nothing sends to Facebook");
 const qCal = D.calendarPack();
 ok(qCal && qCal.icsHref.startsWith("data:text/calendar"), "quick ics data uri");
 ok(qCal.googleUrl.includes("calendar.google.com/calendar/render"), "quick google template");
-ok(qCal.googleUrl.includes(encodeURIComponent("4115 N. 6th Street, Beatrice, NE 68310")), "google location is Zoellner");
-ok(qCal.icsText.includes("LOCATION:4115 N. 6th Street"), "ics has address");
+ok(qCal.googleUrl.includes(encodeURIComponent("Lincoln, NE area")), "google location is the pilot store area");
+ok(qCal.icsText.includes("LOCATION:Lincoln"), "ics has the pilot store area");
+ok(!/zoellner|beatrice/i.test(qCal.icsText + qCal.icsName), "calendar pack does not name the prior store");
 ok(!q1.draft.text.includes("$2,500") && !/payment/i.test(q1.draft.text), "quick confirm invents no discount or payment");
 const qBook1 = D.book();
 ok(!qBook1.blocked && D.state.booked, "human Book marks booked");
@@ -111,7 +113,7 @@ const endSig = Object.fromEntries(D.pulseSignals().map((s) => [s.key, s.score]))
 ok(endSig.price_fit >= 80 && endSig.vehicle_fit >= 80 && endSig.show_odds >= 80, "late guided pulse is all high");
 ok(D.timeIsPicked(), "guided last turn picks a time");
 ok(gEnd.draft.text.includes("Alex Reyes"), "guided confirm has rep");
-ok(gEnd.draft.text.includes("4115 N. 6th Street"), "guided confirm has address");
+ok(gEnd.draft.text.includes("Lincoln, NE area"), "guided confirm has the pilot store area");
 ok(/Parking \(sample, edit\)/.test(gEnd.draft.text), "guided confirm has parking sample");
 ok(D.calendarPack() && D.calendarPack().googleUrl.includes("action=TEMPLATE"), "guided google template after time pick");
 ok(D.book().blocked === false, "guided human Book after time pick");
@@ -120,7 +122,7 @@ D.setPath("medium");
 D.send();
 ok(D.timeIsPicked(), "medium picks a time after send");
 ok(D.calendarPack(), "medium offers calendar after time pick");
-ok(D.detail().draft.text.includes("4115 N. 6th Street"), "medium confirm has address");
+ok(D.detail().draft.text.includes("Lincoln, NE area"), "medium confirm has the pilot store area");
 
 const walk = function (obj, acc) {
   if (typeof obj === "string") acc.push(obj);
@@ -140,7 +142,8 @@ ok(!copy.some(hasEmDash), "new desk copy has no em dashes");
 ok(html.includes('id="deskPath"'), "page has path selector");
 ok(html.includes("deskPrev") && html.includes("deskNext"), "page can step the thread");
 ok(html.includes("Download .ics") || html.includes("calendarPackHtml"), "page can render ics");
-ok(html.includes("4115 N. 6th Street, Beatrice, NE 68310"), "address is on the page");
+ok(js.includes('name: "Pilot store"') && js.includes('address: "Lincoln, NE area"'), "desk script names the pilot store");
+ok(!/zoellner|beatrice/i.test(js), "desk script does not name the prior store");
 ok(html.includes("grok-demo-desk.js"), "page loads desk overlay");
 ok(!/send confirmation/.test(html.match(/Book \$\{esc\(bk\.selected\.label\)\}[^`]*/)?.[0] || ""), "Book button does not claim a live send");
 
