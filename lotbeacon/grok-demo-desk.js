@@ -19,7 +19,7 @@
   const DEALER = {
     name: "Pilot store",
     address: "Lincoln, NE area",
-    parkingSample: "Park in the visitor spots by the showroom doors, north lot off N. 6th.",
+    parkingSample: "Park in the visitor spots by the showroom doors.",
     rep: "Alex Reyes",
     tz: "America/Chicago",
   };
