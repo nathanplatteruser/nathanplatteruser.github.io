@@ -17,8 +17,8 @@
   ];
 
   const DEALER = {
-    name: "Zoellner Ford",
-    address: "4115 N. 6th Street, Beatrice, NE 68310",
+    name: "Pilot store",
+    address: "Lincoln, NE area",
     parkingSample: "Park in the visitor spots by the showroom doors, north lot off N. 6th.",
     rep: "Alex Reyes",
     tz: "America/Chicago",
@@ -975,7 +975,7 @@
       "CALSCALE:GREGORIAN",
       "METHOD:PUBLISH",
       "BEGIN:VEVENT",
-      "UID:lotbeacon-demo-" + parts.compact + "@zoellner",
+      "UID:lotbeacon-demo-" + parts.compact + "@pilot-store",
       "DTSTAMP:20260909T130000Z",
       "DTSTART;TZID=" + DEALER.tz + ":" + parts.compact,
       "DTEND;TZID=" + DEALER.tz + ":" + addHour(parts.compact),
@@ -1000,7 +1000,7 @@
       parking: park,
       icsText: ics,
       icsHref: "data:text/calendar;charset=utf-8," + encodeURIComponent(ics),
-      icsName: "zoellner-visit-2026-09-12.ics",
+      icsName: "pilot-store-visit-2026-09-12.ics",
       googleUrl: google,
     };
   }
