@@ -67,6 +67,11 @@ a:hover { color: var(--ink-2); }
   border: 1px solid var(--line-strong);
   padding: 0.15rem 0.4rem;
 }
+.hts-tag {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
 .nav { margin-left: auto; display: flex; gap: 0.35rem; align-items: center; font-size: 0.9rem; flex-wrap: wrap; }
 .nav a {
   text-decoration: none;
