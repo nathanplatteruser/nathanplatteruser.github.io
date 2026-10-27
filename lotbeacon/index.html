@@ -15,6 +15,7 @@
 <meta name="twitter:title" content="LotBeacon">
 <meta name="twitter:description" content="Human Send. Solo $349 · Three Amigos $599 · Dealership $999.">
 <meta name="twitter:image" content="https://nathanplatteruser.github.io/lotbeacon/og.png">
+<link rel="stylesheet" href="site.css">
 <style>
 :root {
   --ink: #09090b;
@@ -25,65 +26,281 @@
   --fg: #f4f1ea;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; background: var(--ink); color: var(--fg); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
-.wrap { max-width: 42rem; margin: 0 auto; padding: 36px 20px 64px; }
-.kicker { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-h1 { font-family: Georgia, "Iowan Old Style", serif; font-size: clamp(32px, 7vw, 48px); font-weight: 500; line-height: 1.08; margin: 12px 0 14px; }
-.lede { color: var(--muted); margin: 0 0 22px; max-width: 38em; }
-.cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 28px; }
-.cta a { display: inline-block; text-decoration: none; font-weight: 650; padding: 12px 18px; border-radius: 999px; }
+html, body { margin: 0; background: var(--ink); color: var(--fg); font-size: 16px; line-height: 1.5; }
+.trust {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: center;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.wrap { max-width: 52rem; margin: 0 auto; padding: 32px 18px 72px; }
+.brand { margin: 0; font-size: 14px; font-weight: 600; color: var(--paper); }
+h1 { font-size: clamp(34px, 8vw, 52px); font-weight: 500; line-height: 1.05; letter-spacing: -0.02em; margin: 12px 0 14px; text-wrap: balance; }
+h2 { font-size: clamp(26px, 5vw, 34px); font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 8px; text-wrap: balance; }
+.lede, .section p.intro { color: var(--muted); margin: 0 0 18px; max-width: 40em; }
+.cta, .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 8px; }
+.cta a, .links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 999px;
+}
 .cta a.hi { background: var(--paper); color: var(--ink); }
-.cta a.alt { background: transparent; color: var(--fg); border: 1px solid var(--line); }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 16px; margin: 0 0 14px; }
-.card h2 { margin: 0 0 10px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-.card ul { margin: 0; padding-left: 1.15em; }
-.card li { margin: 0 0 6px; }
-.price { font-size: 18px; font-weight: 700; color: var(--paper); }
-.q { font-weight: 650; margin-top: 12px; }
-.q:first-child { margin-top: 0; }
-.a { color: var(--muted); margin: 2px 0 0; }
-.note { font-size: 13px; color: var(--muted); margin-top: 28px; }
+.cta a.alt, .links a { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+.links a { min-height: 40px; font-weight: 500; font-size: 14px; padding: 8px 12px; }
+section { margin-top: 48px; }
+.thread {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.thread header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.thread header strong { font-weight: 600; }
+.thread header span { color: var(--muted); font-size: 14px; }
+.bubble, .draft { margin: 14px 14px 0; padding: 12px 14px; border-radius: 12px; overflow-wrap: anywhere; }
+.bubble.in { background: #1c1c1f; }
+.bubble.out { background: transparent; border: 1px solid var(--line); }
+.who { display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.bubble p, .draft p { margin: 0; }
+.draft { border: 1px dashed #5c584f; background: #18181b; margin-bottom: 14px; }
+.draft .who { color: var(--paper); font-weight: 600; }
+.slots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.slot {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--paper);
+}
+.send {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 16px 18px 18px;
+}
+.send strong {
+  display: block;
+  font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
+  font-size: clamp(26px, 6vw, 34px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.send span { display: block; margin-top: 4px; font-size: 14px; }
+.doors, .plans, .honest { display: grid; gap: 12px; }
+a.door, .plan, .honest article {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  min-width: 0;
+}
+a.door.hi { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+a.door .who, .plan .for, .plan .fine { color: var(--muted); font-size: 14px; }
+a.door.hi .who, a.door.hi .hint { color: #3a3732; }
+a.door .go { font-size: 22px; line-height: 1.25; }
+a.door .hint { font-size: 15px; color: var(--muted); }
+.plan .name { font-size: 18px; font-weight: 600; }
+.plan .amt {
+  font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.plan .amt small { font-family: var(--lb-sans, "IBM Plex Sans", sans-serif); font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.plan .found { color: var(--paper); font-weight: 600; }
+.founding {
+  margin-top: 12px;
+  background: #1a1a1c;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+.founding h3 { margin: 0 0 6px; font-size: 22px; font-weight: 500; }
+.founding p, .honest li { color: var(--muted); }
+.founding p { margin: 0; }
+.honest h3 { margin: 0; font-size: 22px; font-weight: 500; color: var(--paper); }
+.honest ul { margin: 0; padding-left: 1.15em; }
+.honest li { margin: 0 0 8px; }
+.honest li:last-child { margin-bottom: 0; }
+.note { margin-top: 36px; color: var(--muted); font-size: 15px; overflow-wrap: anywhere; }
 .note a { color: var(--paper); }
+@media (min-width: 800px) {
+  .doors, .plans { grid-template-columns: 1fr 1fr 1fr; }
+  .honest { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
+<p class="trust">Fake customers on this site. Nothing leaves this device.</p>
 <main class="wrap">
-  <p class="kicker">LotBeacon</p>
+  <p class="brand">LotBeacon</p>
   <h1>Messenger copilot for the desk. A person still hits Send.</h1>
-  <p class="lede">Seeded floor. Fake customers. Send never leaves this device. You pick the paint. You do not pick the rules.</p>
-
+  <p class="lede">The draft is already on the thread. You read it, you see two real slots, and you hit Send. Rep, manager, and owner each have a door. The stickers below are the same list as pricing, including founding rates and the onboarding waiver. The honesty list is what this site will not claim.</p>
   <div class="cta">
-    <a class="hi" href="CLICK-HERE.html">Open LotBeacon</a>
+    <a class="hi" href="CLICK-HERE.html">Pick your door</a>
     <a class="alt" href="pricing.html">Pricing</a>
     <a class="alt" href="https://calendly.com/nathanplatter">Book intro</a>
   </div>
 
-  <section class="card">
-    <h2>Honesty</h2>
-    <ul>
-      <li>A person still sends. Nothing here auto-sends.</li>
-      <li>Meeting demos are seeded so you see judgment. Live Page wiring is a named-store deliverable.</li>
-      <li>Soft ROI is modeled and labeled. Not measured. Not guaranteed units.</li>
-      <li>No fake SOC 2. Inspectable Send discipline and firewall behavior.</li>
-      <li>Commercial ladder is one list: <span class="price">Solo $349 · Three Amigos $599 · Dealership $999</span>.</li>
-    </ul>
+  <section id="thread" aria-labelledby="thread-title">
+    <h2 id="thread-title">A rep's thread, before Send</h2>
+    <p class="intro">Seeded example from the desk. Riley Cole is a fake customer. The draft offers Saturday 10:30 AM or 1:45 PM and then waits.</p>
+    <article class="thread">
+      <header>
+        <strong>Riley Cole · black Tahoe</strong>
+        <span>Draft waiting · Alex Reyes's desk</span>
+      </header>
+      <div class="bubble out">
+        <span class="who">Alex Reyes · already on the thread</span>
+        <p>Yes we do. What matters most: space, towing, or mileage?</p>
+      </div>
+      <div class="bubble in">
+        <span class="who">Riley Cole · 2m</span>
+        <p>Space. The black Tahoe looks right. Still available? I have a 2018 Accord to trade. Saturday might work.</p>
+      </div>
+      <div class="draft">
+        <span class="who">Draft waiting · not sent</span>
+        <p>Yes, the black 2024 Tahoe Premier is here (stock T2401). We can look at your 2018 Accord when you visit. Saturday 10:30 AM or 1:45 PM. Which one works?</p>
+        <div class="slots" aria-label="Two slots in the draft">
+          <span class="slot">Saturday 10:30 AM</span>
+          <span class="slot">Saturday 1:45 PM</span>
+        </div>
+      </div>
+      <p class="send"><strong>You hit Send.</strong><span>The draft stays on this page until a person does. Nothing leaves this device.</span></p>
+    </article>
+    <div class="links" style="margin-top:14px">
+      <a href="rep.html">Sales rep door</a>
+      <a href="CLICK-HERE.html">Role picker</a>
+    </div>
   </section>
 
-  <section class="card" id="faq">
-    <h2>Ladder</h2>
-    <p class="q">What does it cost?</p>
-    <p class="a">Solo $349 / month (one seat). Three Amigos $599 / month (three seats). Dealership $999 / month (up to 10 seats, +$69/seat over 10). Month-to-month. Annual is two months free. Founding rates lock for 12 months for the first 10 rooftops that sign by 31 Jan 2027.</p>
-    <p class="q">Are you live on our Facebook Page today?</p>
-    <p class="a">No. Seeded preview. Human Send stays when live wiring ships.</p>
-    <p class="q">Does it replace our BDC?</p>
-    <p class="a">No. HITL copilot. We do not sell “fire the desk.”</p>
-    <p class="q">Are you Beakon?</p>
-    <p class="a">No. Beakon is lot GPS. LotBeacon is a Messenger sales copilot.</p>
+  <section id="doors" aria-labelledby="doors-title">
+    <h2 id="doors-title">Three doors</h2>
+    <p class="intro">Same jobs as the role picker. Open a door, or start from the picker if you are not sure which chair you sit in.</p>
+    <div class="doors">
+      <a class="door hi" href="rep.html">
+        <span class="who">Sales rep</span>
+        <span class="go">Show me how to safely book more appointments.</span>
+        <span class="hint">Draft is waiting. You read it. You hit Send. Two real slots. No bot talking to the shopper.</span>
+      </a>
+      <a class="door" href="manager.html">
+        <span class="who">Sales manager</span>
+        <span class="go">Confirm my reps are on the right threads and the right units.</span>
+        <span class="hint">Shared queue. Show-likelihood. Sold units stay sold. You see the draft before it leaves.</span>
+      </a>
+      <a class="door" href="owner.html">
+        <span class="who">Owner / GSM</span>
+        <span class="go">Confirm my people are protecting the store and the customer.</span>
+        <span class="hint">Firewall on price, payment, holds, and Sunday hours. Audit of who sent what. We do not replace your BDC.</span>
+      </a>
+    </div>
+    <div class="links" style="margin-top:14px">
+      <a href="CLICK-HERE.html">Open the role picker</a>
+      <a href="compare.html">Vs the field</a>
+    </div>
+  </section>
+
+  <!-- Prices copied from pricing.html, the commercial source of truth.
+       Modeled return figures stay on that page only. -->
+  <section id="prices" aria-labelledby="prices-title">
+    <h2 id="prices-title">The list</h2>
+    <p class="intro">Month to month. Annual is two months free. Onboarding is $499, waived for founding dealers. Full seat detail, objections, and the modeled figures stay on the pricing page.</p>
+    <div class="plans">
+      <article class="plan">
+        <div class="name">Solo</div>
+        <div class="for">1 seat · open rep license</div>
+        <div class="amt">$349<small> /mo</small></div>
+        <div class="fine">$290.83/mo billed yearly (2 months free)</div>
+        <div class="found">Founding $299 locked 12 mo</div>
+      </article>
+      <article class="plan">
+        <div class="name">Three Amigos</div>
+        <div class="for">3 seats · squad or independent lot</div>
+        <div class="amt">$599<small> /mo</small></div>
+        <div class="fine">$499.17/mo billed yearly</div>
+        <div class="found">Founding $499 locked 12 mo</div>
+      </article>
+      <article class="plan">
+        <div class="name">Dealership</div>
+        <div class="for">Up to 10 seats · +$69/seat over 10</div>
+        <div class="amt">$999<small> /mo</small></div>
+        <div class="fine">$832.50/mo billed yearly</div>
+        <div class="found">Founding $699 locked 12 mo</div>
+      </article>
+    </div>
+    <div class="founding">
+      <h3>Founding-dealer rate</h3>
+      <p>Solo $299 · Three Amigos $499 · Dealership $699. Locked 12 months. First 10 rooftops that sign by 31 Jan 2027. Onboarding is $499, waived for those rooftops. Annual is two months free on the list price as well.</p>
+    </div>
+    <div class="links" style="margin-top:14px">
+      <a href="pricing.html">Open pricing</a>
+      <a href="https://calendly.com/nathanplatter">Book intro</a>
+    </div>
+  </section>
+
+  <section id="honesty" aria-labelledby="honesty-title">
+    <h2 id="honesty-title">What this is. What it is not.</h2>
+    <p class="intro">The same honesty list as the honesty page. No live Page, no auto-send, no BDC replacement, not Beakon.</p>
+    <div class="honest">
+      <article>
+        <h3>Is</h3>
+        <ul>
+          <li>A Messenger sales copilot. A person still hits Send. Nothing here auto-sends.</li>
+          <li>A seeded preview on this site. Fake customers. Send does not leave the device.</li>
+          <li>One price list: Solo $349 · Three Amigos $599 · Dealership $999.</li>
+          <li>Soft ROI, modeled and labeled. Not measured. Not a case study. Not guaranteed units.</li>
+        </ul>
+      </article>
+      <article>
+        <h3>Is not</h3>
+        <ul>
+          <li>Live on your Facebook Page today. Live Page wiring is a named-store deliverable.</li>
+          <li>A bot that sends, books, or holds for you.</li>
+          <li>A replacement for your BDC. We do not sell “fire the desk.”</li>
+          <li>Beakon. Beakon is lot GPS. LotBeacon is the desk.</li>
+          <li>SOC 2. Not claimed. Inspectable Send discipline and firewall behavior. Stripe is not on this page.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="links" style="margin-top:14px">
+      <a href="honesty.html">Honesty page</a>
+      <a href="compare.html">What we leave out</a>
+      <a href="pricing.html">What we will not claim</a>
+    </div>
   </section>
 
   <p class="note">
-    <a href="CLICK-HERE.html">Open the desk</a> ·
+    <a href="CLICK-HERE.html">Pick your door</a> ·
+    <a href="rep.html">Sales rep</a> ·
+    <a href="manager.html">Sales manager</a> ·
+    <a href="owner.html">Owner / GSM</a> ·
     <a href="pricing.html">Pricing</a> ·
+    <a href="honesty.html">What this is not</a> ·
+    <a href="compare.html">Vs the field</a> ·
     <a href="https://calendly.com/nathanplatter">Book intro</a> ·
     <a href="mailto:nathanplatter@gmail.com?subject=LotBeacon%20pilot%20request">Request a pilot</a>
   </p>
