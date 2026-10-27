@@ -1,0 +1,32 @@
+/* LotBeacon type, aligned to Hold the Send: Newsreader + IBM Plex Sans.
+   Georgia and system sans remain fallbacks only. */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap");
+
+:root {
+  --lb-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --lb-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+}
+
+html body {
+  font-family: var(--lb-sans);
+}
+
+body h1,
+body h2,
+body h3,
+body .go,
+body summary {
+  font-family: var(--lb-display);
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.scroller {
+  max-width: 100%;
+}

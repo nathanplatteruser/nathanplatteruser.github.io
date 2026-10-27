@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LotBeacon: pick a door</title>
-<meta name="description" content="First visit. Sales rep, sales manager, or owner. Human Send. Solo $349 · Three Amigos $599 · Dealership $999." />
+<meta name="description" content="First visit. Sales rep, sales manager, or owner. Human Send. Fake customers on this site. Nothing leaves this device.">
+<link rel="stylesheet" href="site.css">
 <style>
 :root { --ink:#09090b; --paper:#f4f1ea; --muted:#9a958c; --card:#121214; --line:#27272a; --fg:#f4f1ea; }
 * { box-sizing: border-box; }
-html, body { margin: 0; background: var(--ink); color: var(--fg); font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+html, body { margin: 0; background: var(--ink); color: var(--fg); font-size: 16px; line-height: 1.45; }
+.trust { margin: 0; background: var(--paper); color: var(--ink); text-align: center; padding: 12px 16px; font-weight: 600; font-size: 15px; line-height: 1.4; }
 .wrap { max-width: 880px; margin: 0 auto; padding: 36px 18px 64px; }
-.kicker { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
-h1 { font-family: Georgia, "Iowan Old Style", serif; font-weight: 500; font-size: clamp(32px, 6vw, 46px); line-height: 1.08; margin: 10px 0 10px; }
+.kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-weight: 500; font-size: clamp(32px, 6vw, 46px); line-height: 1.08; margin: 10px 0; text-wrap: balance; }
 .lede { color: var(--muted); max-width: 38em; margin: 0 0 22px; }
 .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-@media (min-width: 760px) { .grid.roles { grid-template-columns: 1fr 1fr 1fr; } .grid.more { grid-template-columns: 1fr 1fr 1fr; } }
-a.sq { display: flex; flex-direction: column; gap: 8px; min-height: 180px; text-decoration: none; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+a.sq { display: flex; flex-direction: column; gap: 8px; min-height: 0; text-decoration: none; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; min-width: 0; }
 a.sq.hi { background: var(--paper); color: var(--ink); border-color: var(--paper); }
-a.sq .who { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .65; }
-a.sq .go { font-family: Georgia, serif; font-size: 22px; line-height: 1.2; }
-a.sq .hint { font-size: 14px; opacity: .75; }
-h2 { margin: 28px 0 10px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-.note { margin-top: 28px; color: var(--muted); font-size: 13px; }
-.note a { color: var(--paper); }
+a.sq .who { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+a.sq .go { font-size: 22px; line-height: 1.25; }
+a.sq .hint { font-size: 15px; opacity: .75; overflow-wrap: anywhere; }
+h2 { margin: 28px 0 10px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.note { margin-top: 28px; color: var(--muted); font-size: 15px; overflow-wrap: anywhere; }
+.note a, .note b { color: var(--paper); }
+@media (min-width: 760px) {
+  .grid.roles { grid-template-columns: 1fr 1fr 1fr; }
+  .grid.more { grid-template-columns: 1fr 1fr 1fr; }
+}
 </style>
 </head>
 <body>
+<p class="trust">Fake customers on this site. Nothing leaves this device.</p>
 <main class="wrap">
   <p class="kicker">LotBeacon · first visit</p>
   <h1>Who are you on the floor?</h1>
-  <p class="lede">A person still hits Send. Fake customers on this site. Nothing leaves this device. Pick the door that matches your job. Pricing and the honesty list are under the doors.</p>
+  <p class="lede">A person still hits Send. Pick the door that matches your job. Pricing and the honesty list are under the doors. Pilot store (branded franchise, Lincoln, NE area).</p>
 
   <div class="grid roles">
     <a class="sq hi" href="rep.html">
@@ -54,12 +60,12 @@ h2 { margin: 28px 0 10px; font-size: 12px; letter-spacing: .12em; text-transform
     <a class="sq" href="pricing.html">
       <span class="who">Pricing</span>
       <span class="go">Solo $349 · Three Amigos $599 · Dealership $999</span>
-      <span class="hint">One list. Month to month. Annual is two months free.</span>
+      <span class="hint">One list. Month to month. Annual is two months free. Onboarding $499, waived for founding dealers.</span>
     </a>
     <a class="sq" href="honesty.html">
       <span class="who">Honesty</span>
       <span class="go">What this is. What it is not.</span>
-      <span class="hint">Not live on your Page today. Not Beakon. Not “fire the desk.” Soft ROI labeled only.</span>
+      <span class="hint">Not live on your Page today. Not Beakon. Not “fire the desk.”</span>
     </a>
     <a class="sq" href="compare.html">
       <span class="who">Vs the field</span>
@@ -68,7 +74,11 @@ h2 { margin: 28px 0 10px; font-size: 12px; letter-spacing: .12em; text-transform
     </a>
   </div>
 
-  <p class="note"><a href="./">Door</a> · <a href="https://calendly.com/nathanplatter">Book intro</a> · <a href="mailto:nathanplatter@gmail.com?subject=LotBeacon%20pilot%20request">Request a pilot</a></p>
+  <p class="note">
+    <a href="./">Door</a> · <a href="https://calendly.com/nathanplatter">Book intro</a> · <a href="mailto:nathanplatter@gmail.com?subject=LotBeacon%20pilot%20request">Request a pilot</a><br>
+    <b>Bookmark forever:</b> <a href="./">https://nathanplatteruser.github.io/lotbeacon/</a><br>
+    <b>Pricing:</b> <a href="pricing.html">/lotbeacon/pricing.html</a>
+  </p>
 </main>
 </body>
 </html>
