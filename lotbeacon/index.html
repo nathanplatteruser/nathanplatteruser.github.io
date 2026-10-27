@@ -5,37 +5,209 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LotBeacon</title>
 <meta name="description" content="LotBeacon. Messenger copilot for dealership reps. Human Send. Solo $349 · Three Amigos $599 · Dealership $999.">
+<meta name="theme-color" content="#09090b">
 <meta property="og:title" content="LotBeacon">
 <meta property="og:description" content="A person still hits Send. Solo $349 · Three Amigos $599 · Dealership $999.">
 <meta property="og:url" content="https://nathanplatteruser.github.io/lotbeacon/">
 <meta property="og:image" content="https://nathanplatteruser.github.io/lotbeacon/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 <style>
-:root { --ink:#09090b; --paper:#f4f1ea; --muted:#9a958c; --card:#121214; --line:#27272a; --fg:#f4f1ea; }
-* { box-sizing: border-box; }
-html, body { margin: 0; background: var(--ink); color: var(--fg); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-.wrap { max-width: 42rem; margin: 0 auto; padding: 36px 20px 64px; }
-.kicker { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
-h1 { font-family: Georgia, serif; font-weight: 500; font-size: clamp(32px, 7vw, 48px); line-height: 1.08; margin: 12px 0 14px; }
-.lede { color: var(--muted); margin: 0 0 22px; }
-.cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; }
-.cta a { text-decoration: none; font-weight: 650; padding: 12px 18px; border-radius: 999px; }
-.cta a.hi { background: var(--paper); color: var(--ink); }
-.cta a.alt { color: var(--fg); border: 1px solid var(--line); }
-.note { font-size: 13px; color: var(--muted); }
-.note a { color: var(--paper); }
+:root{
+  --bg:#09090b; --raised:#121214; --ink:#f4f1ea; --silver:#c8ccd4; --muted:#a8a399; --stone:#9a958c;
+  --hair:rgba(244,241,234,.14); --hair-strong:rgba(244,241,234,.32);
+  --serif:Newsreader,"Iowan Old Style",Georgia,serif;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --gutter:clamp(20px,5vw,56px);
+}
+*{box-sizing:border-box}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:var(--gutter)}
+:focus-visible{outline:2px solid var(--silver);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;z-index:10}
+.skip:focus{left:8px}
+
+header.top{border-bottom:1px solid var(--hair)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;flex-wrap:wrap}
+.mark{font:400 1.25rem/1 var(--serif);text-decoration:none;letter-spacing:.01em}
+nav{display:flex;flex-wrap:wrap;gap:4px 22px}
+nav a{font-size:15px;color:var(--muted);text-decoration:none;padding:8px 0;transition:color .18s var(--ease)}
+nav a:hover{color:var(--ink)}
+
+.hero{padding:clamp(48px,9vw,104px) 0 clamp(56px,8vw,88px)}
+.hero .wrap{display:grid;gap:clamp(36px,6vw,72px)}
+@media(min-width:960px){.hero .wrap{grid-template-columns:1.1fr .9fr;align-items:center}}
+h1{font:400 clamp(2.4rem,5.6vw,4.25rem)/1.04 var(--serif);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.lede{font-size:clamp(1.125rem,1.5vw,1.25rem);color:var(--silver);max-width:50ch;margin:26px 0 0}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--hair-strong);transition:transform .18s var(--ease),background .18s var(--ease),border-color .18s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.primary:hover{background:#fff}
+.btn:not(.primary):hover{border-color:var(--ink)}
+.price-line{margin:26px 0 0;font-size:15px;color:var(--muted)}
+.price-line a{color:var(--silver)}
+
+/* thread example */
+.thread{background:var(--raised);border:1px solid var(--hair);border-radius:16px;padding:22px;width:100%;max-width:480px;justify-self:end;animation:rise .5s var(--ease) both}
+.thread .cap{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:16px}
+.m{font-size:15px;border-radius:12px;padding:12px 14px;margin:0 0 10px;max-width:90%}
+.m.them{background:#1b1b1f;color:var(--silver);border-top-left-radius:4px}
+.m.draft{border:1px dashed var(--hair-strong);margin-left:auto;border-top-right-radius:4px;animation:rise .45s var(--ease) .5s both}
+.m.draft small{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+.slots{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 0}
+.slots span{border:1px solid var(--hair-strong);border-radius:8px;padding:4px 10px;font-size:13px}
+.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--muted)}
+.bar b{padding:9px 18px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:600;animation:hold .35s var(--ease) 1s both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+@keyframes hold{from{opacity:0;transform:scale(.96)}}
+
+section{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--hair)}
+h2{font:400 clamp(1.9rem,4vw,2.9rem)/1.1 var(--serif);letter-spacing:-.015em;margin:0 0 18px;text-wrap:balance}
+.sub{color:var(--silver);max-width:62ch;margin:0}
+.small{font-size:13px;color:var(--muted)}
+
+/* roles */
+.roles{display:grid;gap:16px;margin-top:40px}
+@media(min-width:900px){.roles{grid-template-columns:1.2fr 1fr 1fr}}
+.role{display:flex;flex-direction:column;gap:14px;padding:26px;border:1px solid var(--hair);border-radius:16px;text-decoration:none;transition:border-color .2s var(--ease),background .2s var(--ease)}
+.role:hover{border-color:var(--hair-strong);background:var(--raised)}
+.role h3{font:400 clamp(1.35rem,2.2vw,1.7rem)/1.2 var(--serif);margin:0}
+.role p{margin:0;color:var(--silver);font-size:15px}
+.role.rep{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.role.rep .small,.role.rep p{color:#3b3a37}
+.role.rep:hover{background:#fff}
+
+/* pricing */
+.tiers{display:grid;gap:0;margin-top:36px;border-top:1px solid var(--hair)}
+.tier{display:grid;gap:4px 24px;padding:24px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+@media(min-width:760px){.tier{grid-template-columns:200px 160px 1fr}}
+.tier h3{font:400 1.5rem/1.2 var(--serif);margin:0}
+.tier .p{font:400 2rem/1 var(--serif)}
+.tier .p small{font:400 15px var(--sans);color:var(--muted)}
+.tier p{margin:0;color:var(--silver);font-size:15px}
+.notes{margin-top:22px;color:var(--muted);font-size:15px;max-width:70ch}
+
+/* honesty */
+.honest{display:grid;gap:28px}
+@media(min-width:900px){.honest{grid-template-columns:1fr 1fr;align-items:start}}
+.honest ul{margin:0;padding:0;list-style:none;border-top:1px solid var(--hair)}
+.honest li{padding:16px 0;border-bottom:1px solid var(--hair);color:var(--silver)}
+
+footer{border-top:1px solid var(--hair);padding:28px 0 40px;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+@media(prefers-reduced-motion:reduce){
+  .thread,.m.draft,.bar b{animation:none}
+  .btn,.role,nav a{transition:none}
+}
 </style>
 </head>
 <body>
-<main class="wrap">
-  <p class="kicker">LotBeacon</p>
-  <h1>Messenger copilot for the desk. A person still hits Send.</h1>
-  <p class="lede">First visit starts with who you are. Rep, manager, or owner. Pricing and the honesty list are on that same page.</p>
-  <div class="cta">
-    <a class="hi" href="CLICK-HERE.html">Pick your door</a>
-    <a class="alt" href="pricing.html">Pricing</a>
-    <a class="alt" href="honesty.html">What this is not</a>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="./" aria-label="LotBeacon home">LotBeacon</a>
+    <nav aria-label="Primary">
+      <a href="CLICK-HERE.html">Pick your door</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="honesty.html">What this is not</a>
+      <a href="compare.html">Vs the field</a>
+      <a href="https://calendly.com/nathanplatter">Book intro</a>
+    </nav>
   </div>
-  <p class="note">Solo $349 · Three Amigos $599 · Dealership $999. <a href="compare.html">Vs the field</a> · <a href="https://calendly.com/nathanplatter">Book intro</a></p>
+</header>
+
+<main id="main">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Messenger copilot for the desk. A person still hits Send.</h1>
+      <p class="lede">First visit starts with who you are. Rep, manager, or owner. Pricing and the honesty list are on that same page.</p>
+      <div class="cta">
+        <a class="btn primary" href="CLICK-HERE.html">Pick your door</a>
+        <a class="btn" href="pricing.html">Pricing</a>
+        <a class="btn" href="honesty.html">What this is not</a>
+      </div>
+      <p class="price-line">Solo $349 · Three Amigos $599 · Dealership $999. <a href="compare.html">Vs the field</a> · <a href="https://calendly.com/nathanplatter">Book intro</a></p>
+    </div>
+
+    <aside class="thread" aria-label="Illustrative example of a rep's view">
+      <div class="cap"><span>Example</span><span>Fake customer, illustrative</span></div>
+      <p class="m them">Is the white one still there? I can come after work.</p>
+      <div class="m draft"><small>Draft is waiting</small>Yes, it's on the lot. Two times that work today:
+        <div class="slots"><span>5:30 PM</span><span>6:15 PM</span></div></div>
+      <div class="bar"><span>You read it.</span><b>You hit Send</b></div>
+    </aside>
+  </div>
+</div>
+
+<section aria-labelledby="floor">
+  <div class="wrap">
+    <h2 id="floor">Who are you on the floor?</h2>
+    <p class="sub">A person still hits Send. Fake customers on this site. Nothing leaves this device. Pick the door that matches your job.</p>
+    <div class="roles">
+      <a class="role rep" href="CLICK-HERE.html">
+        <span class="small">Sales rep</span>
+        <h3>Show me how to safely book more appointments.</h3>
+        <p>Draft is waiting. You read it. You hit Send. Two real slots. No bot talking to the shopper.</p>
+      </a>
+      <a class="role" href="CLICK-HERE.html">
+        <span class="small">Sales manager</span>
+        <h3>Confirm my reps are on the right threads and the right units.</h3>
+        <p>Shared queue. Show-likelihood. Sold units stay sold. You see the draft before it leaves.</p>
+      </a>
+      <a class="role" href="CLICK-HERE.html">
+        <span class="small">Owner / GSM</span>
+        <h3>Confirm my people are protecting the store and the customer.</h3>
+        <p>Firewall on price, payment, holds, and Sunday hours. Audit of who sent what. We do not replace your BDC.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="price">
+  <div class="wrap">
+    <h2 id="price">One list. Month to month.</h2>
+    <p class="sub">Annual is two months free. Onboarding $499, waived for founding dealers.</p>
+    <div class="tiers">
+      <div class="tier"><h3>Solo</h3><div class="p">$349 <small>/mo</small></div><p>1 seat · open rep license. Founding $299, locked 12 months.</p></div>
+      <div class="tier"><h3>Three Amigos</h3><div class="p">$599 <small>/mo</small></div><p>3 seats · squad or independent lot. Founding $499, locked 12 months.</p></div>
+      <div class="tier"><h3>Dealership</h3><div class="p">$999 <small>/mo</small></div><p>Up to 10 seats, +$69/seat over 10. Founding $699, locked 12 months.</p></div>
+    </div>
+    <p class="notes">Soft ROI is modeled only, never promised. Full feature lists are on the <a href="pricing.html">pricing page</a>.</p>
+  </div>
+</section>
+
+<section aria-labelledby="honest">
+  <div class="wrap honest">
+    <div>
+      <h2 id="honest">What this is. What it is not.</h2>
+      <p class="sub">The honesty list is public on purpose.</p>
+      <div class="cta"><a class="btn" href="honesty.html">Read the honesty list</a><a class="btn" href="https://calendly.com/nathanplatter">Book intro</a></div>
+    </div>
+    <ul>
+      <li>Not live on your Page today.</li>
+      <li>Not Beakon.</li>
+      <li>Not “fire the desk.”</li>
+      <li>A person still hits Send.</li>
+    </ul>
+  </div>
+</section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 LotBeacon</span>
+    <a href="CLICK-HERE.html">Pick your door</a><a href="pricing.html">Pricing</a><a href="honesty.html">What this is not</a><a href="compare.html">Vs the field</a>
+    <a href="https://www.holdthesend.com/">Part of Hold the Send</a>
+  </div>
+</footer>
 </body>
 </html>
