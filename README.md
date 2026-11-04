@@ -7,7 +7,7 @@
 **Now shipping**
 - Children’s books (Shelfmark): https://nathanplatteruser.github.io/childrens-books/
 - Shelfmark family copy: https://nathanplatteruser.github.io/shelfmark/
-- LotBeacon live desk: https://nathanplatteruser.github.io/lotbeacon/
+- LotBeacon: https://holdthesend.com/lotbeacon (the old /lotbeacon/ pages forward there)
 - Both Sides of the Letter: https://nathanplatteruser.github.io/dispute-agent-demo/DEMO-OUTPUT.html
 
 **Shared on the road**
